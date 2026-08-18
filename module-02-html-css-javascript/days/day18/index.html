@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Addis Ride Billing System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Addis Ride Billing System</h1>
+
+    <div class="card">
+
+        <label>Trip Distances (km)</label>
+        <input
+            type="text"
+            id="distances"
+            placeholder="Example: 2,3,5">
+
+        <label>Surge Pricing</label>
+
+        <select id="surge">
+            <option value="1">Standard (1x)</option>
+            <option value="1.5">Rush Hour (1.5x)</option>
+            <option value="2">Holiday (2x)</option>
+        </select>
+
+        <button id="generateBtn">
+            Generate Receipt
+        </button>
+
+    </div>
+
+    <div class="receipt-card">
+
+        <h2>Receipt</h2>
+
+        <p id="receipt">
+            Waiting for ride...
+        </p>
+
+        <h3>
+            Trips Completed:
+            <span id="tripCount">0</span>
+        </h3>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
