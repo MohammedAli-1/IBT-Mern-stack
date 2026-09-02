@@ -33,3 +33,13 @@ body {
 h1 {
   text-align: center;
 }
+
+.dish {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+h2{
+  text-align: center;
+  font-weight: bold;
+  color: black;
+}
