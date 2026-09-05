@@ -1,6 +1,6 @@
 import Card from "./Card";
 import { useState } from "react";
-import { PropTypes } from "prop-types";
+import PropTypes from "prop-types";
 function Dish({ name, price, isSlice, category, currency = "ETB", onAdd }) {
   // const [count, setCount] = useState(0);
   // function Add() {
