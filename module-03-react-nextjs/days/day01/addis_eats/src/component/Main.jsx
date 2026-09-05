@@ -1,4 +1,7 @@
 import Dish from "./Dish";
+import { useState } from "react";
+import OrderForm from "./OrderForm";
+import CategoryBar from "./CategoryBar";
 function Main() {
   const menu = [
     // 🍗 Chicken
@@ -73,29 +76,42 @@ function Main() {
   const chicken = menu.filter((item) => item.category == "chicken");
   const vegetarian = menu.filter((item) => item.category == "vegetarian");
   const beef = menu.filter((item) => item.category == "beef");
-  function addToOrder(price){
-    console.log(price)
+
+  const [total, setTotal] = useState(0);
+  // const [category, setCategory] = useState("All");
+  // const show =
+  //   category === "All"
+  //     ? menu
+  //     : category === "chicken"
+  //       ? chicken
+  //       : category === "vegetarian"
+  //         ? vegetarian
+  //         : beef;
+
+  const [category, setCategory] = useState("All");
+  const show =
+    category === "All"
+      ? menu
+      : category === "chicken"
+        ? chicken
+        : category === "vegetarian"
+          ? vegetarian
+          : beef;
+  function addToOrder(price) {
+    setTotal(total + price);
   }
   return (
     <>
-      <h2>Chicken Types</h2>
+      <CategoryBar selectCategory={setCategory} />
+      <h1>Total:{total}</h1>
+
       <div className="dish">
-        {chicken.map((item) => {
+        {show.map((item) => {
           return <Dish key={item.id} {...item} onAdd={addToOrder} />;
         })}
       </div>
-      <h2>vegetarian Types</h2>
-      <div className="dish">
-        {vegetarian.map((item) => {
-          return <Dish key={item.id} {...item} onAdd={addToOrder} />;
-        })}
-      </div>
-      <h2>Beef Types</h2>
-      <div className="dish">
-        {beef.map((item) => {
-          return <Dish key={item.id} {...item} onAdd={addToOrder}/>;
-        })}
-      </div>
+
+      <OrderForm />
     </>
   );
 }
