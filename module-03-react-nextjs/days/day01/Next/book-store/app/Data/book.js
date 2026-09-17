@@ -1,0 +1,42 @@
+export const books = [
+  {
+    id: 1,
+    title: "The Alchemist",
+    author: "Paulo Coelho",
+    price: 450,
+    category: "Fiction",
+    image: "/books/alchemist.jpg",
+  },
+  {
+    id: 2,
+    title: "Atomic Habits",
+    author: "James Clear",
+    price: 600,
+    category: "Self Development",
+    image: "/books/atomic-habits.jpg",
+  },
+  {
+    id: 3,
+    title: "Clean Code",
+    author: "Robert C. Martin",
+    price: 850,
+    category: "Programming",
+    image: "/books/clean-code.jpg",
+  },
+  {
+    id: 4,
+    title: "Rich Dad Poor Dad",
+    author: "Robert Kiyosaki",
+    price: 550,
+    category: "Finance",
+    image: "/books/rich-dad-poor-dad.jpg",
+  },
+  {
+    id: 5,
+    title: "The Pragmatic Programmer",
+    author: "Andrew Hunt",
+    price: 900,
+    category: "Programming",
+    image: "/books/pragmatic-programmer.jpg",
+  },
+];
