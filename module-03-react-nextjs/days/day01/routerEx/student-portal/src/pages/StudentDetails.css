@@ -1,0 +1,223 @@
+.student-details-page {
+  min-height: 100vh;
+  padding: 28px;
+  box-sizing: border-box;
+  background: #f5f7fb;
+} /* ========================================= HEADER ========================================= */
+.student-details-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 24px;
+}
+.back-link {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #2563eb;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+.back-link:hover {
+  text-decoration: underline;
+}
+.student-details-header h1 {
+  margin: 0 0 6px;
+  color: #172033;
+  font-size: 28px;
+}
+.student-details-header p {
+  margin: 0;
+  color: #7b8495;
+  font-size: 14px;
+} /* ========================================= ACTIONS ========================================= */
+.details-actions {
+  display: flex;
+  gap: 10px;
+}
+.edit-student-btn,
+.delete-student-btn {
+  height: 40px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+.edit-student-btn {
+  border: 1px solid #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+}
+.edit-student-btn:hover {
+  background: #1d4ed8;
+}
+.delete-student-btn {
+  border: 1px solid #fecaca;
+  background: #ffffff;
+  color: #dc2626;
+}
+.delete-student-btn:hover {
+  background: #fef2f2;
+} /* ========================================= PROFILE CARD ========================================= */
+.student-profile-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 24px;
+  margin-bottom: 20px;
+  background: #ffffff;
+  border: 1px solid #e5e9f0;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+.large-student-avatar {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 700;
+}
+.student-profile-info h2 {
+  margin: 0 0 5px;
+  color: #172033;
+  font-size: 21px;
+}
+.student-profile-info p {
+  margin: 0 0 10px;
+  color: #7b8495;
+  font-size: 13px;
+} /* ========================================= DETAILS GRID ========================================= */
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.details-card {
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e5e9f0;
+  border-radius: 10px;
+}
+.details-card h2 {
+  margin: 0 0 20px;
+  color: #172033;
+  font-size: 17px;
+} /* ========================================= DETAIL LIST ========================================= */
+.details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.detail-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+.detail-item:first-child {
+  padding-top: 0;
+}
+.detail-item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.detail-item span {
+  color: #87909f;
+  font-size: 13px;
+}
+.detail-item strong {
+  color: #374151;
+  font-size: 13px;
+  text-align: right;
+} /* ========================================= NOT FOUND ========================================= */
+.student-not-found {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  text-align: center;
+}
+.student-not-found h1 {
+  margin-bottom: 8px;
+  color: #172033;
+}
+.student-not-found p {
+  margin-bottom: 20px;
+  color: #7b8495;
+}
+.back-students-btn {
+  padding: 10px 16px;
+  border-radius: 7px;
+  background: #2563eb;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+} /* ========================================= TABLET ========================================= */
+@media (max-width: 750px) {
+  .student-details-page {
+    padding: 18px;
+  }
+  .student-details-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+} /* ========================================= MOBILE ========================================= */
+@media (max-width: 500px) {
+  .student-details-page {
+    padding: 12px;
+  }
+  .student-details-header h1 {
+    font-size: 23px;
+  }
+  .details-actions {
+    width: 100%;
+  }
+  .edit-student-btn,
+  .delete-student-btn {
+    flex: 1;
+  }
+  .student-profile-card {
+    padding: 18px;
+    align-items: flex-start;
+  }
+  .large-student-avatar {
+    width: 55px;
+    height: 55px;
+    font-size: 21px;
+  }
+  .student-profile-info h2 {
+    font-size: 17px;
+  }
+  .details-card {
+    padding: 18px;
+  }
+  .detail-item {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .detail-item strong {
+    text-align: left;
+  }
+}

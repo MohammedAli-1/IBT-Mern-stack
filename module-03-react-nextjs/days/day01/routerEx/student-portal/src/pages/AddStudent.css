@@ -1,0 +1,297 @@
+
+/* =========================================
+   ADD STUDENT PAGE
+========================================= */
+
+.add-student-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 28px;
+  box-sizing: border-box;
+  background: #f5f7fb;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.add-student-header {
+  margin-bottom: 24px;
+}
+
+.add-student-header h1 {
+  margin: 0 0 6px;
+  color: #172033;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.add-student-header p {
+  margin: 0;
+  color: #7b8495;
+  font-size: 14px;
+}
+
+
+/* =========================================
+   FORM CONTAINER
+========================================= */
+
+.student-form-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e9f0;
+  border-radius: 12px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   FORM SECTION
+========================================= */
+
+.form-section {
+  padding: 26px;
+
+  border-bottom: 1px solid #e9edf3;
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+}
+
+.form-section-title {
+  margin-bottom: 22px;
+}
+
+.form-section-title h2 {
+  margin: 0 0 5px;
+
+  color: #172033;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.form-section-title p {
+  margin: 0;
+
+  color: #87909f;
+
+  font-size: 13px;
+}
+
+
+/* =========================================
+   FORM GRID
+========================================= */
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 20px;
+}
+
+
+/* =========================================
+   FORM GROUP
+========================================= */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-group label {
+  color: #374151;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  height: 44px;
+
+  padding: 0 13px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #dfe4ec;
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  color: #374151;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition: 0.2s ease;
+}
+
+.form-group input::placeholder {
+  color: #a2a9b5;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.form-error {
+  color: #dc2626;
+  font-size: 12px;
+}
+
+
+/* =========================================
+   FORM ACTIONS
+========================================= */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 20px 26px;
+
+  background: #fafbfc;
+
+  border-radius: 0 0 12px 12px;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.cancel-btn,
+.save-btn {
+  min-width: 110px;
+
+  height: 42px;
+
+  padding: 0 18px;
+
+  border-radius: 7px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.cancel-btn {
+  border: 1px solid #dfe4ec;
+
+  background: #ffffff;
+
+  color: #596273;
+}
+
+.cancel-btn:hover {
+  background: #f3f4f6;
+}
+
+.save-btn {
+  border: 1px solid #2563eb;
+
+  background: #2563eb;
+
+  color: #ffffff;
+}
+
+.save-btn:hover {
+  background: #1d4ed8;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 700px) {
+
+  .add-student-page {
+    padding: 18px;
+  }
+
+  .add-student-header h1 {
+    font-size: 24px;
+  }
+
+  .form-section {
+    padding: 20px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    padding: 16px 20px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 450px) {
+
+  .add-student-page {
+    padding: 12px;
+  }
+
+  .add-student-header h1 {
+    font-size: 22px;
+  }
+
+  .student-form-container {
+    border-radius: 8px;
+  }
+
+  .form-section {
+    padding: 16px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+
+    padding: 16px;
+  }
+
+  .cancel-btn,
+  .save-btn {
+    width: 100%;
+  }
+
+}
+
