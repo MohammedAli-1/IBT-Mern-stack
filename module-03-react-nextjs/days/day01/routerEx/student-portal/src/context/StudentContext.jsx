@@ -1,69 +1,39 @@
 
-import { createContext, useContext, useState } from "react";
-
+import { createContext, useContext, useReducer } from "react";
 import { students as initialStudents } from "../Data/students";
-
+import { studentReducer } from "../Reducers/studentReducer";
 
 const StudentContext = createContext();
 
-
 export function StudentProvider({ children }) {
-
-  const [students, setStudents] = useState(initialStudents);
+  const [students, dispatch] = useReducer(
+    studentReducer,
+    initialStudents
+  );
 
   const addStudent = (student) => {
-
-    setStudents((previousStudents) => [
-      ...previousStudents,
-      {
-        ...student,
-        id: Date.now(),
-        grade: Number(student.grade),
-      },
-    ]);
-
+    dispatch({
+      type: "ADD_STUDENT",
+      payload: student,
+    });
   };
-
-
-  // ==========================================
-  // DELETE STUDENT
-  // ==========================================
 
   const deleteStudent = (id) => {
-
-    setStudents((previousStudents) =>
-      previousStudents.filter(
-        (student) => student.id !== id
-      )
-    );
-
+    dispatch({
+      type: "DELETE_STUDENT",
+      payload: id,
+    });
   };
-
-
-  // ==========================================
-  // UPDATE STUDENT
-  // ==========================================
 
   const updateStudent = (id, updatedStudent) => {
-
-    setStudents((previousStudents) =>
-      previousStudents.map((student) =>
-        student.id === id
-          ? {
-              ...student,
-              ...updatedStudent,
-              grade: Number(updatedStudent.grade),
-            }
-          : student
-      )
-    );
-
+    dispatch({
+      type: "UPDATE_STUDENT",
+      payload: {
+        id,
+        student: updatedStudent,
+      },
+    });
   };
-
-
-  // ==========================================
-  // CONTEXT VALUE
-  // ==========================================
 
   const value = {
     students,
@@ -72,7 +42,6 @@ export function StudentProvider({ children }) {
     updateStudent,
   };
 
-
   return (
     <StudentContext.Provider value={value}>
       {children}
@@ -80,13 +49,7 @@ export function StudentProvider({ children }) {
   );
 }
 
-
-// ============================================
-// CUSTOM HOOK
-// ============================================
-
 export function useStudents() {
-
   const context = useContext(StudentContext);
 
   if (!context) {
