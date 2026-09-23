@@ -1,0 +1,158 @@
+.teachers-page {
+  padding: 24px;
+}
+
+/* Header */
+
+.teachers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.teachers-header h1 {
+  margin: 0;
+}
+
+.teachers-header p {
+  margin-top: 6px;
+  color: #666;
+}
+
+.add-teacher-btn {
+  padding: 10px 16px;
+  background: #2563eb;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+/* Statistics */
+
+.teacher-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card h3 {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.stat-card p {
+  margin: 10px 0 0;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* Filters */
+
+.teacher-filters {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.teacher-filters input,
+.teacher-filters select {
+  padding: 11px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Table */
+
+.teachers-table-container {
+  overflow-x: auto;
+  background: white;
+  border-radius: 10px;
+}
+
+.teachers-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.teachers-table th,
+.teachers-table td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.teachers-table th {
+  background: #f8fafc;
+  font-size: 14px;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.status.active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status.inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.teacher-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.teacher-actions a {
+  text-decoration: none;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .teachers-page {
+    padding: 16px;
+  }
+
+  .teachers-header {
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .teacher-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .teacher-filters {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .teachers-header {
+    flex-direction: column;
+  }
+
+  .add-teacher-btn {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+}

@@ -1,14 +1,14 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-
-import { useStudents } from "../context/StudentContext.jsx";
+import { useStudentStore } from "../../store/studentStore.js";
 import "./StudentDetails.css";
 
 function StudentDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { students, deleteStudent } = useStudents();
+  const students = useStudentStore((state) => state.students);
 
+  const deleteStudent = useStudentStore((state) => state.deleteStudent);
   // =========================================
   // FIND STUDENT
   // =========================================
