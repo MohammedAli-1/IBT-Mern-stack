@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "name": "Abebe Kebede",
+    "email": "abebe@example.com",
+    "gender": "Male",
+    "grade": 10,
+    "section": "A",
+    "classId": 1,
+    "phone": "0911000001",
+    "status": "Active"
+  },
+  {
+    "id": 2,
+    "name": "Hana Ali",
+    "email": "hana@example.com",
+    "gender": "Female",
+    "grade": 10,
+    "section": "A",
+    "classId": 1,
+    "phone": "0911000002",
+    "status": "Active"
+  },
+  {
+    "id": 3,
+    "name": "Yonas Tesfaye",
+    "email": "yonas@example.com",
+    "gender": "Male",
+    "grade": 10,
+    "section": "B",
+    "classId": 2,
+    "phone": "0911000003",
+    "status": "Active"
+  },
+  {
+    "id": 4,
+    "name": "Sara Mohammed",
+    "email": "sara@example.com",
+    "gender": "Female",
+    "grade": 10,
+    "section": "B",
+    "classId": 2,
+    "phone": "0911000004",
+    "status": "Active"
+  },
+  {
+    "id": 5,
+    "name": "Dawit Alemu",
+    "email": "dawit@example.com",
+    "gender": "Male",
+    "grade": 11,
+    "section": "A",
+    "classId": 3,
+    "phone": "0911000005",
+    "status": "Active"
+  },
+  {
+    "id": 6,
+    "name": "Mekdes Bekele",
+    "email": "mekdes@example.com",
+    "gender": "Female",
+    "grade": 12,
+    "section": "A",
+    "classId": 4,
+    "phone": "0911000006",
+    "status": "Active"
+  }
+]

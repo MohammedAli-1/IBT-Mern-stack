@@ -1,33 +1,40 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+
 import "./Header.css";
 
 function Header() {
   return (
-    <header className="header">
-      <nav className="navbar">
-        {/* Logo */}
-        <NavLink to="/" className="logo">
-          Student<span>Hub</span>
+    <header className="public-header">
+      {/* ================= LOGO ================= */}
+
+      <Link to="/" className="header-logo">
+        <strong>SchoolMS</strong>
+        <span>School Management System</span>
+      </Link>
+
+      {/* ================= NAVIGATION ================= */}
+
+      <nav className="header-nav">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive ? "header-link active" : "header-link"
+          }
+        >
+          Home
         </NavLink>
 
-        {/* Navigation Links */}
-        <div className="nav-links">
-          <NavLink to="/" className="nav-link">
-            Home
-          </NavLink>
+        <a href="/#features" className="header-link">
+          Features
+        </a>
 
-          <NavLink to="/courses" className="nav-link">
-            Courses
-          </NavLink>
+        <a href="/#roles" className="header-link">
+          Roles
+        </a>
 
-          <NavLink to="/students" className="nav-link">
-            Students
-          </NavLink>
-
-          <NavLink to="/profile" className="nav-link">
-            Profile
-          </NavLink>
-        </div>
+        <Link to="/login" className="header-login-button">
+          Login
+        </Link>
       </nav>
     </header>
   );

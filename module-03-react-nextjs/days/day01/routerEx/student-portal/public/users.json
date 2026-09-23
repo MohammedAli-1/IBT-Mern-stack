@@ -1,0 +1,33 @@
+[
+  {
+    "id": 1,
+    "name": "School Admin",
+    "email": "admin@school.com",
+    "password": "admin123",
+    "role": "admin"
+  },
+  {
+    "id": 2,
+    "name": "Ahmed Hassan",
+    "email": "ahmed@example.com",
+    "password": "teacher123",
+    "role": "teacher",
+    "teacherId": 1
+  },
+  {
+    "id": 3,
+    "name": "Abebe Kebede",
+    "email": "abebe@example.com",
+    "password": "student123",
+    "role": "student",
+    "studentId": 1
+  },
+  {
+    "id": 4,
+    "name": "Parent User",
+    "email": "parent@example.com",
+    "password": "parent123",
+    "role": "parent",
+    "studentIds": [1, 2]
+  }
+]

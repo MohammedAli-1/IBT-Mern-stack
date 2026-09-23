@@ -1,0 +1,340 @@
+/* =========================================
+   CLASS DETAILS PAGE
+========================================= */
+
+.class-details-page {
+  min-height: 100vh;
+  padding: 32px;
+  background: #f5f7fb;
+}
+
+.class-details-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.class-details-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.class-details-header h1 {
+  margin: 0 0 8px;
+  font-size: 30px;
+  font-weight: 700;
+  color: #172033;
+}
+
+.class-details-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+/* =========================================
+   BACK BUTTON
+========================================= */
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.back-button:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+/* =========================================
+   CLASS INFORMATION
+========================================= */
+
+.class-info-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.class-info-card {
+  background: #ffffff;
+  border: 1px solid #e8ebf0;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.class-info-card span {
+  display: block;
+  margin-bottom: 8px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.class-info-card strong {
+  color: #172033;
+  font-size: 17px;
+}
+
+/* =========================================
+   STATUS
+========================================= */
+
+.status-active {
+  color: #15803d !important;
+}
+
+.status-inactive {
+  color: #dc2626 !important;
+}
+
+/* =========================================
+   SECTION
+========================================= */
+
+.class-section {
+  background: #ffffff;
+  border: 1px solid #e8ebf0;
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.section-header h2 {
+  margin: 0 0 5px;
+  color: #172033;
+  font-size: 21px;
+}
+
+.section-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.teacher-count {
+  padding: 7px 12px;
+  border-radius: 20px;
+  background: #eef2ff;
+  color: #4338ca;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* =========================================
+   TEACHERS GRID
+========================================= */
+
+.teachers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.teacher-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fafbfc;
+  transition: 0.2s ease;
+}
+
+.teacher-card:hover {
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+.teacher-avatar {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #172033;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.teacher-info {
+  min-width: 0;
+}
+
+.teacher-info h3 {
+  margin: 0 0 4px;
+  color: #172033;
+  font-size: 16px;
+}
+
+.teacher-info p {
+  margin: 0 0 4px;
+  color: #4f46e5;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.teacher-info span {
+  display: block;
+  color: #6b7280;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.empty-state {
+  padding: 35px;
+  text-align: center;
+  border: 1px dashed #d1d5db;
+  border-radius: 10px;
+  color: #6b7280;
+}
+
+/* =========================================
+   ACTIONS
+========================================= */
+
+.class-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.edit-class-button,
+.delete-class-button {
+  border: none;
+  border-radius: 8px;
+  padding: 11px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.edit-class-button {
+  background: #172033;
+  color: #ffffff;
+}
+
+.edit-class-button:hover {
+  background: #0f172a;
+}
+
+.delete-class-button {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.delete-class-button:hover {
+  background: #fecaca;
+}
+
+/* =========================================
+   ACCESS DENIED / NOT FOUND
+========================================= */
+
+.class-details-container > h2 {
+  color: #172033;
+}
+
+.class-details-container > p {
+  color: #6b7280;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1000px) {
+  .class-info-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .class-details-page {
+    padding: 20px 15px;
+  }
+
+  .class-details-header {
+    flex-direction: column;
+  }
+
+  .class-details-header h1 {
+    font-size: 25px;
+  }
+
+  .class-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .teachers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .class-actions {
+    justify-content: stretch;
+    flex-direction: column;
+  }
+
+  .edit-class-button,
+  .delete-class-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 450px) {
+  .class-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .class-section {
+    padding: 18px;
+  }
+
+  .section-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .teacher-card {
+    padding: 14px;
+  }
+}

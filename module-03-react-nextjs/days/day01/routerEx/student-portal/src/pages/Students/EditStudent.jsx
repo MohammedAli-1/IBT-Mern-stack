@@ -1,34 +1,64 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useStudents } from "../context/StudentContext.jsx";
+import { useNavigate, useParams } from "react-router-dom";
+
+// import { useStudents } from "../context/StudentContext";
+import { useStudentStore } from "../../store/studentStore";
+
 import "./AddStudent.css";
 
-function AddStudent() {
+function EditStudent() {
+  const { id } = useParams();
+
   const navigate = useNavigate();
-  const { addStudent } = useStudents();
-  // =================================
+
+  const students = useStudentStore((state) => state.students);
+
+  const updateStudent = useStudentStore((state) => state.updateStudent);
+  // =========================================
+  // FIND STUDENT
+  // =========================================
+
+  const student = students.find((student) => student.id === Number(id));
+
+  // =========================================
+  // HANDLE INVALID ID
+  // =========================================
+
+  if (!student) {
+    return (
+      <div className="student-not-found">
+        <h1>Student Not Found</h1>
+
+        <button className="save-btn" onClick={() => navigate("/students")}>
+          Back to Students
+        </button>
+      </div>
+    );
+  }
+
+  // =========================================
   // FORM STATE
-  // =================================
+  // =========================================
 
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    gender: "",
-    grade: "",
-    section: "",
-    phone: "",
-    status: "Active",
+    name: student.name,
+    email: student.email,
+    gender: student.gender,
+    grade: String(student.grade),
+    section: student.section,
+    phone: student.phone,
+    status: student.status,
   });
 
-  // =================================
-  // ERROR STATE
-  // =================================
+  // =========================================
+  // ERRORS
+  // =========================================
 
   const [errors, setErrors] = useState({});
 
-  // =================================
-  // HANDLE INPUT CHANGE
-  // =================================
+  // =========================================
+  // HANDLE CHANGE
+  // =========================================
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -38,16 +68,15 @@ function AddStudent() {
       [name]: value,
     }));
 
-    // Remove error when user starts fixing it
     setErrors((previousErrors) => ({
       ...previousErrors,
       [name]: "",
     }));
   };
 
-  // =================================
+  // =========================================
   // VALIDATION
-  // =================================
+  // =========================================
 
   const validateForm = () => {
     const newErrors = {};
@@ -79,9 +108,9 @@ function AddStudent() {
     return newErrors;
   };
 
-  // =================================
-  // SUBMIT FORM
-  // =================================
+  // =========================================
+  // SUBMIT
+  // =========================================
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -90,54 +119,36 @@ function AddStudent() {
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+
       return;
     }
 
-    addStudent(formData);
+    updateStudent(student.id, formData);
 
-
-    alert("Student added successfully!");
-
-    navigate("/students");
-  };
-
-  // =================================
-  // CANCEL
-  // =================================
-
-  const handleCancel = () => {
-    navigate("/students");
+    navigate(`/students/${student.id}`);
   };
 
   return (
     <div className="add-student-page">
-      {/* =================================
-          PAGE HEADER
-      ================================= */}
-
       <div className="add-student-header">
         <div>
-          <h1>Add New Student</h1>
+          <h1>Edit Student</h1>
 
-          <p>Enter the student's information below.</p>
+          <p>Update {student.name}'s information.</p>
         </div>
       </div>
 
-      {/* =================================
-          FORM
-      ================================= */}
-
       <div className="student-form-container">
         <form onSubmit={handleSubmit}>
-          {/* ===============================
+          {/* =================================
               PERSONAL INFORMATION
-          ================================ */}
+          ================================= */}
 
           <div className="form-section">
             <div className="form-section-title">
               <h2>Personal Information</h2>
 
-              <p>Basic information about the student.</p>
+              <p>Update the student's basic information.</p>
             </div>
 
             <div className="form-grid">
@@ -150,7 +161,6 @@ function AddStudent() {
                   id="name"
                   name="name"
                   type="text"
-                  placeholder="Enter student name"
                   value={formData.name}
                   onChange={handleChange}
                 />
@@ -169,7 +179,6 @@ function AddStudent() {
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="student@example.com"
                   value={formData.email}
                   onChange={handleChange}
                 />
@@ -211,7 +220,6 @@ function AddStudent() {
                   id="phone"
                   name="phone"
                   type="tel"
-                  placeholder="09xxxxxxxx"
                   value={formData.phone}
                   onChange={handleChange}
                 />
@@ -223,15 +231,15 @@ function AddStudent() {
             </div>
           </div>
 
-          {/* ===============================
+          {/* =================================
               SCHOOL INFORMATION
-          ================================ */}
+          ================================= */}
 
           <div className="form-section">
             <div className="form-section-title">
               <h2>School Information</h2>
 
-              <p>Student's current enrollment information.</p>
+              <p>Update enrollment information.</p>
             </div>
 
             <div className="form-grid">
@@ -269,7 +277,6 @@ function AddStudent() {
                   id="section"
                   name="section"
                   type="text"
-                  placeholder="Example: A"
                   value={formData.section}
                   onChange={handleChange}
                 />
@@ -298,17 +305,21 @@ function AddStudent() {
             </div>
           </div>
 
-          {/* ===============================
-              FORM ACTIONS
-          ================================ */}
+          {/* =================================
+              ACTIONS
+          ================================= */}
 
           <div className="form-actions">
-            <button type="button" className="cancel-btn" onClick={handleCancel}>
+            <button
+              type="button"
+              className="cancel-btn"
+              onClick={() => navigate(`/students/${student.id}`)}
+            >
               Cancel
             </button>
 
             <button type="submit" className="save-btn">
-              Add Student
+              Save Changes
             </button>
           </div>
         </form>
@@ -317,4 +328,4 @@ function AddStudent() {
   );
 }
 
-export default AddStudent;
+export default EditStudent;

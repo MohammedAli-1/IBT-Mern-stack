@@ -1,15 +1,14 @@
-import { Navigate, useLocation } from "react-router-dom";
-function RequireAuth({ user, children }) {
-  const location = useLocation();
-  if (!user) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuthStore } from "./store/authStore";
+
+function RequireAuth() {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
   }
-  return (
-    <>
-      <h2>{user.name}</h2>
-      {children}
-    </>
-  );
+
+  return <Outlet />;
 }
 
 export default RequireAuth;

@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "name": "Ahmed Hassan",
+    "email": "ahmed@example.com",
+    "gender": "Male",
+    "phone": "0911000001",
+    "subject": "Mathematics",
+    "qualification": "BSc Mathematics",
+    "experience": 5,
+    "status": "Active"
+  },
+  {
+    "id": 2,
+    "name": "Fatima Mohammed",
+    "email": "fatima@example.com",
+    "gender": "Female",
+    "phone": "0911000002",
+    "subject": "English",
+    "qualification": "BA English",
+    "experience": 3,
+    "status": "Active"
+  },
+  {
+    "id": 3,
+    "name": "Dawit Bekele",
+    "email": "dawit@example.com",
+    "gender": "Male",
+    "phone": "0911000003",
+    "subject": "Physics",
+    "qualification": "BSc Physics",
+    "experience": 7,
+    "status": "Inactive"
+  }
+]
