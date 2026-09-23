@@ -1,0 +1,124 @@
+/* =========================
+   ORDER SUCCESS
+========================= */
+
+.order-success-page {
+  min-height: 100vh;
+
+  padding: 60px 5%;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.order-success-card {
+  width: 100%;
+  max-width: 650px;
+
+  padding: 60px 40px;
+
+  text-align: center;
+
+  background-color: #ffffff;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 18px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* SUCCESS ICON */
+
+.success-icon {
+  width: 70px;
+  height: 70px;
+
+  margin: 0 auto 25px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background-color: #e8f5e9;
+
+  color: #22863a;
+
+  font-size: 38px;
+  font-weight: 700;
+}
+
+/* TEXT */
+
+.order-success-card h1 {
+  margin-bottom: 15px;
+
+  font-size: 30px;
+}
+
+.order-success-card p {
+  max-width: 500px;
+
+  margin: 0 auto 30px;
+
+  color: #666;
+
+  line-height: 1.7;
+}
+
+/* BUTTONS */
+
+.success-actions {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+}
+
+.success-actions a {
+  padding: 11px 18px;
+
+  border-radius: 8px;
+
+  background-color: #111;
+
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+.success-actions a:hover {
+  transform: translateY(-2px);
+
+  opacity: 0.9;
+}
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+  .order-success-card {
+    padding: 45px 20px;
+  }
+
+  .order-success-card h1 {
+    font-size: 25px;
+  }
+
+  .success-actions {
+    flex-direction: column;
+  }
+
+  .success-actions a {
+    width: 100%;
+  }
+}
