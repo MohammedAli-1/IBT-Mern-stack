@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import "./navbar.css";
 
@@ -6,7 +5,9 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
+
         <Link href="/" className="logo">
+          <span>📚</span>
           BookStore
         </Link>
 
@@ -20,15 +21,15 @@ export default function Navbar() {
           </Link>
 
           <Link href="/cart" className="nav-link">
-            Cart
+            🛒 Cart
           </Link>
 
-          <Link href="/checkout" className="nav-link">
+          <Link href="/checkout" className="nav-link checkout-link">
             Checkout
           </Link>
         </div>
+
       </div>
     </nav>
   );
 }
-
