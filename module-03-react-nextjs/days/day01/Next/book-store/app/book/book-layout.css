@@ -1,0 +1,147 @@
+/* =========================
+   BOOK LAYOUT
+========================= */
+
+.book-layout {
+  min-height: 100vh;
+
+  padding-top: 76px;
+
+  background-color: #ffffff;
+}
+
+/* =========================
+   FIXED SIDEBAR
+========================= */
+
+.book-sidebar {
+  position: fixed;
+
+  top: 76px;
+  left: 0;
+  bottom: 0;
+
+  width: 240px;
+
+  padding: 25px 20px;
+
+  background-color: #f8fafc;
+
+  border-right: 1px solid #e5e7eb;
+
+  overflow-y: auto;
+
+  z-index: 100;
+}
+
+/* =========================
+   SIDEBAR TITLE
+========================= */
+
+.book-sidebar h2 {
+  margin: 0 0 20px;
+
+  color: #111827;
+
+  font-size: 21px;
+  font-weight: 700;
+}
+
+/* =========================
+   CATEGORY LIST
+========================= */
+
+.book-sidebar ul {
+  list-style: none;
+
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.book-sidebar li a {
+  display: block;
+
+  padding: 11px 12px;
+
+  color: #4b5563;
+
+  text-decoration: none;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  border-radius: 7px;
+
+  transition: all 0.2s ease;
+}
+
+.book-sidebar li a:hover {
+  color: #2563eb;
+
+  background-color: #eaf2ff;
+
+  padding-left: 17px;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.book-content {
+  margin-left: 240px;
+
+  min-height: calc(100vh - 76px);
+
+  padding: 40px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+  .book-layout {
+    padding-top: 120px;
+  }
+
+  .book-sidebar {
+    position: static;
+
+    width: 100%;
+
+    padding: 20px;
+
+    border-right: none;
+
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .book-sidebar ul {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 6px;
+  }
+
+  .book-content {
+    margin-left: 0;
+
+    padding: 25px 20px;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 450px) {
+  .book-sidebar ul {
+    grid-template-columns: 1fr;
+  }
+}
