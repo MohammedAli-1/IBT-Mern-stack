@@ -1,0 +1,69 @@
+{
+  "items": [
+    {
+      "name": "Chicken Tikka",
+      "price": 12.99,
+      "id": 1,
+      "isSlice": true,
+      "category": "chicken"
+    },
+    {
+      "name": "Chicken Burger",
+      "price": 10.99,
+      "id": 2,
+      "isSlice": false,
+      "category": "chicken"
+    },
+    {
+      "name": "Grilled Chicken",
+      "price": 13.99,
+      "id": 3,
+      "isSlice": false,
+      "category": "chicken"
+    },
+
+    {
+      "name": "Beef Burger",
+      "price": 9.99,
+      "id": 4,
+      "isSlice": false,
+      "category": "beef"
+    },
+    {
+      "name": "Beef Steak",
+      "price": 15.99,
+      "id": 5,
+      "isSlice": false,
+      "category": "beef"
+    },
+    {
+      "name": "Beef Pizza",
+      "price": 12.99,
+      "id": 6,
+      "isSlice": true,
+      "category": "beef"
+    },
+
+    {
+      "name": "Veggie Pizza",
+      "price": 11.99,
+      "id": 7,
+      "isSlice": true,
+      "category": "vegetarian"
+    },
+    {
+      "name": "Vegetable Pasta",
+      "price": 10.99,
+      "id": 8,
+      "isSlice": false,
+      "category": "vegetarian"
+    },
+    {
+      "name": "Garden Salad",
+      "price": 8.99,
+      "id": 9,
+      "isSlice": false,
+      "category": "vegetarian"
+    }
+  ]
+}
