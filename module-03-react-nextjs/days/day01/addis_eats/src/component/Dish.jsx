@@ -1,11 +1,11 @@
 import Card from "./Card";
-import { useState } from "react";
+import { useContext} from "react";
+import { cartContext } from "../App";
 import PropTypes from "prop-types";
-function Dish({ name, price, isSlice, category, currency = "ETB", onAdd }) {
-  // const [count, setCount] = useState(0);
-  // function Add() {
-  //   return setCount(count + 1);
-  // }
+function Dish({ id, name, price, isSlice, category, currency = "ETB", onAdd }) {
+  const { cart, dispatch } = useContext(cartContext);
+  // const user = useContext(userContext)
+  const isIncart = cart.some((item) => item.id == id);
   return (
     <div className="card">
       <Card>
@@ -16,6 +16,30 @@ function Dish({ name, price, isSlice, category, currency = "ETB", onAdd }) {
         <p>{category}</p>
         <em>{isSlice && "Slice"}</em>
         <button onClick={() => onAdd(price)}>Add</button>
+        {!isIncart ? (
+          <button
+            onClick={() =>
+              dispatch({
+                type: "Add",
+                payload: { id, name, price, isSlice, category },
+              })
+            }
+          >
+            AddtoCart
+          </button>
+        ) : (
+          <button
+            onClick={() =>
+              dispatch({
+                type: "Remove",
+                payload: { id },
+              })
+            }
+          >
+            RemoveCart
+          </button>
+        )}
+
         {/* <p>Quantity:{count}</p> */}
       </Card>
     </div>
