@@ -1,12 +1,12 @@
-import { useContext } from "react";
-import { cartContext } from "../App";
+import ThemeToggle from "./ThemeToggle";
+
 function Header() {
-  const {cart} = useContext(cartContext);
   return (
-    <div>
+    <header>
       <h1>Addis Eats</h1>
-      <h1>cart Item:{cart.length}</h1>
-    </div>
+      <p>Delicious Food, Made for You</p>
+      <ThemeToggle />
+    </header>
   );
 }
 
