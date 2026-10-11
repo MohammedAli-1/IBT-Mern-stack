@@ -1,20 +1,21 @@
+function CategoryBar({ selectedCategory, onSelectedCategory }) {
+  const categories = ["All", "Chicken", "Beef", "Vegetarian"];
 
-function CategoryBar({ selectCategory }) {
-  const categories = ["All", "chicken", "vegetarian", "beef"];
   return (
-    <div>
-      {categories.map((cat) => {
-        return (
-          <button
-            key={cat}
-            onClick={() => {
-              selectCategory(cat);
-            }}
-          >
-            {cat}
-          </button>
-        );
-      })}
+    <div className="category-bar">
+      {categories.map((category) => (
+        <button
+          key={category}
+          className={
+            selectedCategory === category
+              ? "category-btn active"
+              : "category-btn"
+          }
+          onClick={() => onSelectedCategory(category)}
+        >
+          {category}
+        </button>
+      ))}
     </div>
   );
 }

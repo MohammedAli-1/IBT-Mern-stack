@@ -1,0 +1,41 @@
+.hero {
+  background: #1f2937;
+  color: white;
+  padding: 90px 20px;
+}
+
+.hero-content {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-block;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  color: #d1d5db;
+}
+
+.hero-button {
+  border: none;
+  padding: 13px 25px;
+  border-radius: 8px;
+  background: #f59e0b;
+  color: white;
+  font-weight: bold;
+}
+
+.hero-button:hover {
+  background: #d97706;
+}

@@ -1,0 +1,37 @@
+.header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header .container {
+  min-height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo > span {
+  font-size: 32px;
+}
+
+.logo h1 {
+  font-size: 22px;
+}
+
+.logo p {
+  font-size: 13px;
+  color: #777;
+}
+
+.cart-summary {
+  font-weight: 600;
+}
