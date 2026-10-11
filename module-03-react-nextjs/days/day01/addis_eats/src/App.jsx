@@ -17,6 +17,7 @@ function App() {
     (sum, item) => item.price * item.quantity + sum,
     0,
   );
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleAddToCart = useCallback(
     (item) => {
@@ -56,7 +57,7 @@ function App() {
     <ThemeProvider>
       <ThemedApp>
         <main>
-          <Header />
+          <Header cartCount={cartCount} />
           <MenuSection
             menu={menu}
             category={category}
