@@ -1,0 +1,29 @@
+
+import { createContext, useContext } from "react";
+import useCart from "../hooks/useCart";
+
+const CartContext = createContext(null);
+
+export function CartProvider({ children }) {
+  const { cart, dispatch } = useCart();
+
+  return (
+    <CartContext.Provider value={{ cart, dispatch }}>
+      {children}
+    </CartContext.Provider>
+  );
+}
+
+export function useCartContext() {
+  const context = useContext(CartContext);
+
+  if (context === null) {
+    throw new Error(
+      "useCartContext must be used inside CartProvider"
+    );
+  }
+
+  return context;
+}
+
+export default CartContext;

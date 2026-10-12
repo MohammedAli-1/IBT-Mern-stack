@@ -1,23 +1,31 @@
 import { useState, useCallback } from "react";
-
+import { Routes, Route } from "react-router-dom";
+import RequireAuth from "./component/RequireAuth";
+import Home from "./pages/Home";
+import Cart from "./pages/Cart";
+import NotFound from "./pages/not-found";
+import FoodDetails from "./pages/FoodDetails";
+import Login from "./pages/Login";
+import Checkout from "./pages/Checkout";
 import useFetch from "./hooks/useFetch";
+import { useCartContext, CartProvider } from "./context/CartContext";
 import { ThemedApp, ThemeProvider } from "./context/ThemeContext";
-import "./index.css";
-import CartSection from "./component/Cart";
-import MenuSection from "./component/Menu";
-import Header from "./component/Header";
-import useCart from "./hooks/useCart";
-function App() {
-  const [category, setCategory] = useState("All");
-  const [search, setSearch] = useState("");
-  const { data: menu, error, loading } = useFetch("menu.json");
 
-  const { cart, dispatch } = useCart();
+import MainLayout from "./layouts/MainLayout";
+
+import "./index.css";
+
+function AppContent() {
+  const [search, setSearch] = useState("");
+
+  const { data: menu, error, loading } = useFetch("/menu.json");
+
+  const { cart, dispatch } = useCartContext();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const totals = cart.reduce(
-    (sum, item) => item.price * item.quantity + sum,
+    (sum, item) => sum + item.price * item.quantity,
     0,
   );
-  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleAddToCart = useCallback(
     (item) => {
@@ -28,24 +36,28 @@ function App() {
     },
     [dispatch],
   );
+
   function removeFromCart(id) {
     dispatch({
       type: "Remove",
       payload: id,
     });
   }
+
   function increaseQuantity(id) {
     dispatch({
       type: "Increase",
       payload: id,
     });
   }
+
   function decreaseQuantity(id) {
     dispatch({
       type: "Decrease",
       payload: id,
     });
   }
+
   if (loading) {
     return <p>Loading menu...</p>;
   }
@@ -53,31 +65,64 @@ function App() {
   if (error) {
     return <p>Sorry, we could not load the menu.</p>;
   }
+
   return (
     <ThemeProvider>
       <ThemedApp>
-        <main>
-          <Header cartCount={cartCount} />
-          <MenuSection
-            menu={menu}
-            category={category}
-            setCategory={setCategory}
-            search={search}
-            setSearch={setSearch}
-            onAddToCart={handleAddToCart}
+        <Routes>
+          {/* Login page */}
+          <Route
+            path="/login"
+            element={<Login onLogin={() => setIsAuthenticated(true)} />}
           />
-          <section>
-            <CartSection
-              cart={cart}
-              total={totals}
-              onIncrease={increaseQuantity}
-              onDecrease={decreaseQuantity}
-              onRemove={removeFromCart}
+
+          {/* Main application layout */}
+          <Route path="/" element={<MainLayout />}>
+            <Route
+              index
+              element={
+                <Home
+                  menu={menu}
+                  search={search}
+                  setSearch={setSearch}
+                  onAddToCart={handleAddToCart}
+                />
+              }
             />
-          </section>
-        </main>
+
+            <Route
+              path="cart"
+              element={
+                <Cart
+                  cart={cart}
+                  total={totals}
+                  onIncrease={increaseQuantity}
+                  onDecrease={decreaseQuantity}
+                  onRemove={removeFromCart}
+                />
+              }
+            />
+
+            <Route path="foods/:id" element={<FoodDetails />} />
+
+            {/* Protected checkout */}
+            <Route element={<RequireAuth isAuthenticated={isAuthenticated} />}>
+              <Route path="checkout" element={<Checkout />} />
+            </Route>
+
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
       </ThemedApp>
     </ThemeProvider>
+  );
+}
+
+function App() {
+  return (
+    <CartProvider>
+      <AppContent />
+    </CartProvider>
   );
 }
 
