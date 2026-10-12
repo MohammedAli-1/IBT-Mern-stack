@@ -1,11 +1,10 @@
-
 import { createContext, useContext } from "react";
-import useCart from "../hooks/useCart";
+import useCartState from "../hooks/useCart";
 
 const CartContext = createContext(null);
 
 export function CartProvider({ children }) {
-  const { cart, dispatch } = useCart();
+  const { cart, dispatch } = useCartState();
 
   return (
     <CartContext.Provider value={{ cart, dispatch }}>
@@ -14,12 +13,12 @@ export function CartProvider({ children }) {
   );
 }
 
-export function useCartContext() {
+export function useCart() {
   const context = useContext(CartContext);
 
   if (context === null) {
     throw new Error(
-      "useCartContext must be used inside CartProvider"
+      "useCart must be used inside CartProvider"
     );
   }
 

@@ -1,4 +1,36 @@
-function CartSection({ cart, total, onIncrease, onDecrease, onRemove }) {
+import useCartStore from "../store/cartStore";
+
+function CartSection() {
+  const cart = useCartStore((state) => state.items);
+  const removeItem = useCartStore((state) => state.removeItem);
+  const addItem = useCartStore((state) => state.addItem);
+
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  function onIncrease(id) {
+    const item = cart.find((item) => item.id === id);
+
+    if (item) {
+      addItem(item);
+    }
+  }
+
+  function onDecrease(id) {
+    const item = cart.find((item) => item.id === id);
+
+    if (item && item.quantity > 1) {
+      useCartStore.setState((state) => ({
+        items: state.items.map((current) =>
+          current.id === id
+            ? { ...current, quantity: current.quantity - 1 }
+            : current,
+        ),
+      }));
+    } else if (item) {
+      removeItem(id);
+    }
+  }
+
   return (
     <section>
       <h2>Your Cart</h2>
@@ -22,7 +54,7 @@ function CartSection({ cart, total, onIncrease, onDecrease, onRemove }) {
 
             <p>Subtotal: {item.price * item.quantity} ETB</p>
 
-            <button onClick={() => onRemove(item.id)}>Remove</button>
+            <button onClick={() => removeItem(item.id)}>Remove</button>
           </article>
         ))
       )}

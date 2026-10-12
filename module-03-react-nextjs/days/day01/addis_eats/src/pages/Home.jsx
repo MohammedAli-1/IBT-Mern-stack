@@ -1,9 +1,13 @@
+
 import MenuSection from "../component/Menu";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import useCartStore from "../store/cartStore";
 
-function Home({ menu, search, setSearch, onAddToCart }) {
+function Home({ menu, search, setSearch }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+
+  const addItem = useCartStore((state) => state.addItem);
 
   const category = searchParams.get("category") || "All";
 
@@ -21,7 +25,9 @@ function Home({ menu, search, setSearch, onAddToCart }) {
 
   return (
     <main>
-      <button onClick={() => navigate("/cart")}>Go to Cart</button>
+      <button onClick={() => navigate("/cart")}>
+        Go to Cart
+      </button>
 
       <MenuSection
         menu={menu}
@@ -29,7 +35,7 @@ function Home({ menu, search, setSearch, onAddToCart }) {
         setCategory={handleCategoryChange}
         search={search}
         setSearch={setSearch}
-        onAddToCart={onAddToCart}
+        onAddToCart={addItem}
       />
     </main>
   );

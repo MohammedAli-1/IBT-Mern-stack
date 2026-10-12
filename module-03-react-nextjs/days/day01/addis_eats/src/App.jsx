@@ -1,15 +1,19 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+
 import RequireAuth from "./component/RequireAuth";
+
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import NotFound from "./pages/not-found";
 import FoodDetails from "./pages/FoodDetails";
 import Login from "./pages/Login";
 import Checkout from "./pages/Checkout";
+
 import useFetch from "./hooks/useFetch";
-import { useCartContext, CartProvider } from "./context/CartContext";
-import { ThemedApp, ThemeProvider } from "./context/ThemeContext";
+
+import { ThemeProvider, ThemedApp } from "./context/ThemeContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 
 import MainLayout from "./layouts/MainLayout";
 
@@ -20,43 +24,7 @@ function AppContent() {
 
   const { data: menu, error, loading } = useFetch("/menu.json");
 
-  const { cart, dispatch } = useCartContext();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const totals = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0,
-  );
-
-  const handleAddToCart = useCallback(
-    (item) => {
-      dispatch({
-        type: "Add",
-        payload: item,
-      });
-    },
-    [dispatch],
-  );
-
-  function removeFromCart(id) {
-    dispatch({
-      type: "Remove",
-      payload: id,
-    });
-  }
-
-  function increaseQuantity(id) {
-    dispatch({
-      type: "Increase",
-      payload: id,
-    });
-  }
-
-  function decreaseQuantity(id) {
-    dispatch({
-      type: "Decrease",
-      payload: id,
-    });
-  }
+  const { isAuthenticated, login } = useAuth();
 
   if (loading) {
     return <p>Loading menu...</p>;
@@ -70,42 +38,20 @@ function AppContent() {
     <ThemeProvider>
       <ThemedApp>
         <Routes>
-          {/* Login page */}
-          <Route
-            path="/login"
-            element={<Login onLogin={() => setIsAuthenticated(true)} />}
-          />
+          <Route path="/login" element={<Login onLogin={login} />} />
 
-          {/* Main application layout */}
           <Route path="/" element={<MainLayout />}>
             <Route
               index
               element={
-                <Home
-                  menu={menu}
-                  search={search}
-                  setSearch={setSearch}
-                  onAddToCart={handleAddToCart}
-                />
+                <Home menu={menu} search={search} setSearch={setSearch} />
               }
             />
 
-            <Route
-              path="cart"
-              element={
-                <Cart
-                  cart={cart}
-                  total={totals}
-                  onIncrease={increaseQuantity}
-                  onDecrease={decreaseQuantity}
-                  onRemove={removeFromCart}
-                />
-              }
-            />
+            <Route path="cart" element={<Cart />} />
 
             <Route path="foods/:id" element={<FoodDetails />} />
 
-            {/* Protected checkout */}
             <Route element={<RequireAuth isAuthenticated={isAuthenticated} />}>
               <Route path="checkout" element={<Checkout />} />
             </Route>
@@ -120,9 +66,9 @@ function AppContent() {
 
 function App() {
   return (
-    <CartProvider>
+    <AuthProvider>
       <AppContent />
-    </CartProvider>
+    </AuthProvider>
   );
 }
 
