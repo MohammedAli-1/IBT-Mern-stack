@@ -1,11 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import useCartStore from "../store/cartStore";
+import ErrorBoundary from "../component/ErrorBoundary";
+import "./checkout.css";
 
-function CartSection() {
+function CartContent() {
+  const navigate = useNavigate();
+
   const cart = useCartStore((state) => state.items);
-  const removeItem = useCartStore((state) => state.removeItem);
   const addItem = useCartStore((state) => state.addItem);
+  const removeItem = useCartStore((state) => state.removeItem);
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   function onIncrease(id) {
     const item = cart.find((item) => item.id === id);
@@ -18,7 +25,9 @@ function CartSection() {
   function onDecrease(id) {
     const item = cart.find((item) => item.id === id);
 
-    if (item && item.quantity > 1) {
+    if (!item) return;
+
+    if (item.quantity > 1) {
       useCartStore.setState((state) => ({
         items: state.items.map((current) =>
           current.id === id
@@ -26,42 +35,138 @@ function CartSection() {
             : current,
         ),
       }));
-    } else if (item) {
+    } else {
       removeItem(id);
     }
   }
 
   return (
-    <section>
-      <h2>Your Cart</h2>
+    <main className="checkout-page cart-page">
+      <div className="checkout-heading">
+        <span className="checkout-eyebrow">ADDIS EATS</span>
+        <h1>Your Cart</h1>
+        <p>Review your delicious choices before checkout.</p>
+      </div>
 
       {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <section className="empty-cart">
+          <span className="empty-cart-icon" aria-hidden="true">
+            🛒
+          </span>
+
+          <h2>Your cart is empty</h2>
+          <p>Add something delicious from our menu to get started.</p>
+
+          <button
+            type="button"
+            className="checkout-secondary-button"
+            onClick={() => navigate("/")}
+          >
+            Browse Menu
+          </button>
+        </section>
       ) : (
-        cart.map((item) => (
-          <article key={item.id} className="dish-card">
-            <h3>{item.name}</h3>
+        <div className="cart-layout">
+          <section className="cart-items" aria-label="Cart items">
+            {cart.map((item) => (
+              <article className="cart-item" key={item.id}>
+                <div className="cart-item-info">
+                  <h2>{item.name}</h2>
+                  <p>{item.price.toLocaleString()} ETB each</p>
 
-            <p>Price: {item.price} ETB each</p>
+                  <strong>
+                    {(item.price * item.quantity).toLocaleString()} ETB
+                  </strong>
+                </div>
 
-            <div className="quantity-controls">
-              <button onClick={() => onDecrease(item.id)}>−</button>
+                <div className="cart-item-actions">
+                  <div
+                    className="quantity-controls"
+                    aria-label={`Quantity of ${item.name}`}
+                  >
+                    <button
+                      type="button"
+                      aria-label={`Decrease ${item.name} quantity`}
+                      onClick={() => onDecrease(item.id)}
+                    >
+                      −
+                    </button>
 
-              <span>{item.quantity}</span>
+                    <span>{item.quantity}</span>
 
-              <button onClick={() => onIncrease(item.id)}>+</button>
+                    <button
+                      type="button"
+                      aria-label={`Increase ${item.name} quantity`}
+                      onClick={() => onIncrease(item.id)}
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="remove-item-button"
+                    onClick={() => removeItem(item.id)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </article>
+            ))}
+          </section>
+
+          <aside className="cart-summary">
+            <h2>Order Summary</h2>
+
+            <div className="summary-line">
+              <span>Items</span>
+              <span>{totalItems}</span>
             </div>
 
-            <p>Subtotal: {item.price * item.quantity} ETB</p>
+            <div className="summary-line summary-total">
+              <span>Total</span>
+              <strong>{total.toLocaleString()} ETB</strong>
+            </div>
 
-            <button onClick={() => removeItem(item.id)}>Remove</button>
-          </article>
-        ))
+            <button
+              type="button"
+              className="place-order-button"
+              onClick={() => navigate("/checkout")}
+            >
+              Proceed to Checkout
+            </button>
+
+            <button
+              type="button"
+              className="checkout-secondary-button"
+              onClick={() => navigate("/")}
+            >
+              Continue Shopping
+            </button>
+
+            <p className="summary-note">Your cart is saved in this browser.</p>
+          </aside>
+        </div>
       )}
-
-      <h3>Cart total: {total} ETB</h3>
-    </section>
+    </main>
   );
 }
 
-export default CartSection;
+function Cart() {
+  return (
+    <ErrorBoundary
+      fallback={
+        <main className="checkout-page cart-page">
+          <section className="empty-cart" role="alert">
+            <h2>Cart temporarily unavailable</h2>
+            <p>We couldn't display your cart. Please try again.</p>
+          </section>
+        </main>
+      }
+    >
+      <CartContent />
+    </ErrorBoundary>
+  );
+}
+
+export default Cart;

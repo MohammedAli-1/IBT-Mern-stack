@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import RequireAuth from "./component/RequireAuth";
@@ -8,7 +8,6 @@ import Cart from "./pages/Cart";
 import NotFound from "./pages/not-found";
 import FoodDetails from "./pages/FoodDetails";
 import Login from "./pages/Login";
-import Checkout from "./pages/Checkout";
 
 import useFetch from "./hooks/useFetch";
 
@@ -18,6 +17,28 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import MainLayout from "./layouts/MainLayout";
 
 import "./index.css";
+
+// Load these pages only when their routes are visited.
+const Checkout = lazy(() => import("./pages/Checkout"));
+const Receipt = lazy(() => import("./pages/Receipt"));
+
+function LoadingSkeleton() {
+  return (
+    <main className="checkout-page" aria-live="polite">
+      <div className="checkout-heading">
+        <span className="checkout-eyebrow">ADDIS EATS</span>
+        <h1>Loading page...</h1>
+        <p>Please wait while we prepare your page.</p>
+      </div>
+
+      <div className="loading-skeleton" aria-hidden="true">
+        <div className="skeleton-line" />
+        <div className="skeleton-line" />
+        <div className="skeleton-block" />
+      </div>
+    </main>
+  );
+}
 
 function AppContent() {
   const [search, setSearch] = useState("");
@@ -53,7 +74,23 @@ function AppContent() {
             <Route path="foods/:id" element={<FoodDetails />} />
 
             <Route element={<RequireAuth isAuthenticated={isAuthenticated} />}>
-              <Route path="checkout" element={<Checkout />} />
+              <Route
+                path="checkout"
+                element={
+                  <Suspense fallback={<LoadingSkeleton />}>
+                    <Checkout />
+                  </Suspense>
+                }
+              />
+
+              <Route
+                path="receipt"
+                element={
+                  <Suspense fallback={<LoadingSkeleton />}>
+                    <Receipt />
+                  </Suspense>
+                }
+              />
             </Route>
 
             <Route path="*" element={<NotFound />} />
