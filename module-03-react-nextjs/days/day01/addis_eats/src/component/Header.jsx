@@ -1,8 +1,8 @@
 import { NavLink } from "react-router";
 import ThemeToggle from "./ThemeToggle";
-import { useCartContext } from "../context/CartContext";
+import useCartStore from "../store/cartStore";
 function Header() {
-  const { cart } = useCartContext();
+  const cart = useCartStore((state) => state.items);
 
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   return (
