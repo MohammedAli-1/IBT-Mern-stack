@@ -1,6 +1,7 @@
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 import MenuSection from "../component/Menu";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import ErrorBoundary from "../component/ErrorBoundary";
 import useCartStore from "../store/cartStore";
 
 function Home({ menu, search, setSearch }) {
@@ -25,18 +26,30 @@ function Home({ menu, search, setSearch }) {
 
   return (
     <main>
-      <button onClick={() => navigate("/cart")}>
+      <button type="button" onClick={() => navigate("/cart")}>
         Go to Cart
       </button>
 
-      <MenuSection
-        menu={menu}
-        category={category}
-        setCategory={handleCategoryChange}
-        search={search}
-        setSearch={setSearch}
-        onAddToCart={addItem}
-      />
+      <ErrorBoundary
+        fallback={
+          <section role="alert" className="menu-error">
+            <h2>Menu temporarily unavailable</h2>
+            <p>
+              We couldn't display the menu. Please refresh the page and try
+              again.
+            </p>
+          </section>
+        }
+      >
+        <MenuSection
+          menu={menu}
+          category={category}
+          setCategory={handleCategoryChange}
+          search={search}
+          setSearch={setSearch}
+          onAddToCart={addItem}
+        />
+      </ErrorBoundary>
     </main>
   );
 }

@@ -384,3 +384,50 @@
     justify-content: space-between;
   }
 }
+
+.loading-skeleton {
+  display: grid;
+  gap: 16px;
+  max-width: 650px;
+  margin: 30px auto;
+}
+
+.skeleton-line,
+.skeleton-block {
+  background: #f0e8df;
+  border-radius: 10px;
+  animation: skeleton-pulse 1.2s ease-in-out infinite alternate;
+}
+
+.skeleton-line {
+  height: 22px;
+}
+
+.skeleton-line:first-child {
+  width: 70%;
+}
+
+.skeleton-line:nth-child(2) {
+  width: 45%;
+}
+
+.skeleton-block {
+  height: 180px;
+}
+
+@keyframes skeleton-pulse {
+  from {
+    opacity: 0.55;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-line,
+  .skeleton-block {
+    animation: none;
+  }
+}
