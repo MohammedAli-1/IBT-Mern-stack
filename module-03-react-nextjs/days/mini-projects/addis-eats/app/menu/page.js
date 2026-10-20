@@ -1,7 +1,7 @@
 import { Suspense } from "react";
-import FoodCard from "../components/FoodCard";
 import foods from "../Data/foods";
 import Link from "next/link";
+import AddToCartButton from "../components/AddToCartButton";
 
 export const revalidate = 60;
 
@@ -25,12 +25,15 @@ async function FoodList({ category }) {
             </div>
             <h2 className="text-lg font-semibold">{food.name}</h2>
             <p className="mt-2 text-gray-600">{food.price} ETB</p>
-            <Link
-              href={`/menu/${food.id}`}
-              className="mt-3 inline-block font-semibold text-orange-600 hover:text-orange-700"
-            >
-              View Details →
-            </Link>
+            <div className="mt-3 flex items-center justify-between">
+              <Link
+                href={`/menu/${food.id}`}
+                className="font-semibold text-orange-600 hover:text-orange-700"
+              >
+                View Details →
+              </Link>
+              <AddToCartButton food={food} compact />
+            </div>
           </article>
         ))}
       </div>

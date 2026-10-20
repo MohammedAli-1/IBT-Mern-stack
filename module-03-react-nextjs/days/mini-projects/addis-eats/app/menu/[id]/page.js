@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import foods from "@/app/Data/foods";
+import AddToCartButton from "@/app/components/AddToCartButton";
 // Revalidate eligible static pages after 60 seconds
 export const revalidate = 60;
 
@@ -56,6 +57,8 @@ export default async function DishPage({ params }) {
           <div className="rounded-lg bg-gray-100 p-3 text-sm text-gray-600">
             <strong>Page generated at:</strong> {generatedAt}
           </div>
+
+          <AddToCartButton food={food} />
         </div>
       </article>
     </main>
