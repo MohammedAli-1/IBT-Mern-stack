@@ -1,32 +1,41 @@
 # Addis Eats — Data Fetching Strategy
 
-## SWR Setup
+Every SWR query below lists its key, its refresh rule, and one line of reasoning.
 
-- Shared fetcher lives in `lib/fetcher.js` — throws on non-ok responses so SWR
-  populates `error` correctly.
-- `useDebounce` hook in `lib/useDebounce.js` — 300 ms delay before the SWR key
-  changes, preventing a network request on every keystroke.
+## Queries
 
-## Orders Page (`/orders`)
+| Component      | SWR Key                                      | Refresh rule              | Reasoning                                                                 |
+| -------------- | -------------------------------------------- | ------------------------- | ------------------------------------------------------------------------- |
+| `OrdersList`   | `/api/orders?page=N`                         | `refreshInterval: 5000`   | Order status can change server-side; poll every 5 s so the user sees updates without a manual reload. |
+| `OrdersList`   | `/api/orders?search=TERM&page=N`             | `refreshInterval: 5000`   | Same polling rule applies when a search term is active.                   |
+| `OrdersList`   | `null` (empty search term)                   | n/a — fetch skipped       | Null key tells SWR to do nothing; full list is already in `fallbackData`. |
 
-| Feature            | Implementation                                      |
-| ------------------ | --------------------------------------------------- |
-| Initial data       | Server component reads `orders` array and passes `fallbackData` — zero loading flash on first paint. |
-| Live polling       | `refreshInterval: 5000` — SWR re-fetches every 5 s; visible in the Network tab. |
-| Search             | Debounced input; SWR key is `null` when the term is empty (full list shown). |
-| No flash           | `keepPreviousData: true` — stale data stays visible while the next fetch resolves. |
-| Pagination         | `?page=N` in the query string; server slices `PAGE_SIZE = 5` per page. |
+## Options
 
-## API Route behaviour
+| Option              | Value  | Reasoning                                                                                     |
+| ------------------- | ------ | --------------------------------------------------------------------------------------------- |
+| `fallbackData`      | first page from server | Orders page is server-rendered; passing the first slice means SWR hydrates instantly — no spinner on first paint. |
+| `keepPreviousData`  | `true` | Stale results stay visible while the next fetch resolves — list never flashes empty between searches or page changes. |
+| `refreshInterval`   | `5000` | 5 s is frequent enough to feel live, slow enough not to hammer the server.                    |
 
-| Endpoint            | Query params         | Notes                                      |
-| ------------------- | -------------------- | ------------------------------------------ |
-| `GET /api/orders`   | `?search=`, `?page=` | Filters by name/address, paginates server-side. Returns `x-total-count` header. |
-| `POST /api/orders`  | —                    | 201 on success, 422 + `fieldErrors` on invalid input. |
+## Shared fetcher (`lib/fetcher.js`)
 
-## Why SWR over useEffect + fetch
+Throws on non-ok responses so SWR sets `error` correctly — all queries benefit
+from a single consistent error shape without repeating try/catch.
 
-- No manual loading/error state — SWR manages both.
-- Automatic deduplication: multiple components using the same key share one request.
-- `keepPreviousData` and `fallbackData` give instant UX without extra logic.
-- `refreshInterval` is one option — no `setInterval` cleanup needed.
+## Debounce (`lib/useDebounce.js`, 300 ms)
+
+Typing five characters fires one request, not five. The SWR key only changes
+after the user stops typing for 300 ms.
+
+## Paging
+
+Page number lives in `?page=N` in the URL — the link is shareable and survives
+a refresh. `useSearchParams` reads it; `router.push` writes it.
+
+## Network tab behaviour while typing
+
+1. User types — no requests until 300 ms after the last keystroke.
+2. One request fires with the debounced term.
+3. `keepPreviousData` keeps the previous list visible during the round trip.
+4. Result arrives — list updates in place, no empty flash.
