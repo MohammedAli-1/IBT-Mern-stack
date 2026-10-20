@@ -35,6 +35,16 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+## Performance measurement (PERF.md)
+
+Run `npm run build && npm start`, then measure in Chrome DevTools Lighthouse with:
+- **Slow 4G throttling** (realistic mobile network)
+- **Production build** (`npm run start`, not dev mode)
+- **Desktop viewport** (consistency across runs)
+
+The deliverable is not the code — it's the documented improvement and the explanation
+of what caused it. See `PERF.md` for before/after numbers and single-change attribution.
+
 ## Network tab — what you see while typing in the orders search
 
 - Typing quickly fires **zero** requests until 300 ms after the last keystroke (debounce).
