@@ -37,7 +37,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## First Load JS — /menu (Exercise 7)
 
-### Build output (current)
+### Build output (current — Next.js 16.3.6 with Turbopack)
 
 ```
 Route (app)
@@ -60,16 +60,16 @@ Route (app)
 ƒ  (Dynamic)  server-rendered on demand
 ```
 
-### Before vs After — FilterShell boundary
+> Note: Next.js 16 with Turbopack does not print per-route First Load JS sizes
+> in the build output. The table below reflects the architectural before/after.
 
-| State | /menu First Load JS | Notes |
-|-------|---------------------|-------|
-| Before — `FoodList` inline in page, no client boundary | ~102 kB | Entire page subtree could pull client deps |
-| After — `FilterShell` wraps children as a client boundary | ~102 kB | Server `FoodList` HTML never enters the JS bundle |
+### Before vs After — boundary refactor
 
-The bundle size stays similar because `FilterShell` itself is tiny.
-The real gain is architectural: the **children pattern** means the server-rendered
-dish list is passed as already-resolved RSC payload — Next.js will throw a build
-error if you accidentally import a server-only module (DB call, `fs`, etc.) inside
-a client component. Moving `"use client"` to the smallest leaf (e.g. `CartItem`
-instead of the whole `cart/page.js`) is where measurable JS savings appear.
+| State | /menu boundary | Effect |
+|-------|----------------|--------|
+| Before — `FoodList` and cart logic inline in page-level client components | Page-level `"use client"` on cart and menu | Entire page tree ships to browser as JS |
+| After — `"use client"` pushed to leaves (`CartItem`, `AddToCartButton`, `MenuCounter`, `Navbar`) | Server components own data fetching; client boundary only on interactive leaves | Only the interactive leaf JS ships; server-rendered HTML for the rest |
+
+The meaningful saving is that `cart/page.js` being `"use client"` is now justified
+(it reads context directly), while `menu/page.js` is a pure server component —
+its dish list HTML never enters any JS bundle.
