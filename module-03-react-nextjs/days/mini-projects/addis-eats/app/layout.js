@@ -14,8 +14,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Addis-Eats",
+  metadataBase: new URL("https://addis-eats.vercel.app"),
+  title: {
+    default: "Addis-Eats — Order Food in Addis Ababa",
+    template: "%s | Addis-Eats",
+  },
   description: "Discover and order delicious food in Addis Ababa.",
+  openGraph: {
+    siteName: "Addis-Eats",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Addis-Eats" }],
+  },
 };
 
 export default function RootLayout({ children }) {

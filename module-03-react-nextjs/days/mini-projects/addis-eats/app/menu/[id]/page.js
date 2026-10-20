@@ -13,6 +13,23 @@ export function generateStaticParams() {
   }));
 }
 
+// Ex 3: dynamic metadata using the dish's name, price and description
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const food = foods.find((item) => item.id === Number(id));
+  if (!food) return { title: "Dish not found" };
+
+  return {
+    title: food.name,
+    description: `${food.description} — ${food.price} ETB. Order now on Addis-Eats.`,
+    openGraph: {
+      title: food.name,
+      description: `${food.description} — ${food.price} ETB`,
+      images: [{ url: food.image, width: 800, height: 600, alt: food.name }],
+    },
+  };
+}
+
 export default async function DishPage({ params }) {
   // Get the dish ID from the URL
   const { id } = await params;
@@ -30,6 +47,25 @@ export default async function DishPage({ params }) {
 
   return (
     <main className="mx-auto max-w-4xl px-6 py-10">
+      {/* Ex 5: MenuItem JSON-LD generated from the same dish object */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "MenuItem",
+            name: food.name,
+            description: food.description,
+            offers: {
+              "@type": "Offer",
+              price: food.price,
+              priceCurrency: "ETB",
+              availability: "https://schema.org/InStock",
+            },
+            image: food.image,
+          }),
+        }}
+      />
       <Link
         href="/menu"
         className="mb-6 inline-block text-orange-600 hover:text-orange-700"

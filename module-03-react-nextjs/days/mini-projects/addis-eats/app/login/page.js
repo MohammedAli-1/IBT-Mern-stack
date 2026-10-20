@@ -1,5 +1,10 @@
 import LoginForm from "../components/LoginForm";
 
+export const metadata = {
+  title: "Login",
+  description: "Sign in to your Addis-Eats account to track orders and checkout faster.",
+};
+
 export default async function LoginPage({ searchParams }) {
   const { next } = await searchParams;
 
