@@ -7,10 +7,19 @@ import FilterShell from "../components/FilterShell";
 
 export const revalidate = 60;
 
-export const metadata = {
-  title: "Menu",
-  description: "Browse our full menu of Ethiopian dishes, fast food, breakfast, drinks and desserts. Order online for delivery in Addis Ababa.",
-};
+// Canonical always points at /menu without query params so Google doesn't
+// index ?category=Ethiopian as a separate page.
+export async function generateMetadata({ searchParams }) {
+  const { category } = await searchParams;
+  return {
+    title: category ? `${category} — Menu` : "Menu",
+    description:
+      "Browse our full menu of Ethiopian dishes, fast food, breakfast, drinks and desserts. Order online for delivery in Addis Ababa.",
+    alternates: {
+      canonical: "https://addis-eats.vercel.app/menu",
+    },
+  };
+}
 
 // Server component — awaits and renders the dish list
 async function FoodList({ category }) {

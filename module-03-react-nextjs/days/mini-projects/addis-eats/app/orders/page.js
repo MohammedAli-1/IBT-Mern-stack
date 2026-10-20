@@ -4,6 +4,12 @@ import { getOrdersByOwner } from "../Data/orders";
 import { getSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 
+export const metadata = {
+  title: "My Orders",
+  description: "View and track your Addis-Eats orders.",
+  alternates: { canonical: "https://addis-eats.vercel.app/orders" },
+};
+
 export default async function OrdersPage() {
   // Every private page verifies session while rendering — not only in middleware
   const session = await getSession();
