@@ -1,3 +1,8 @@
+export const metadata = {
+  title: "Create Account",
+  description: "Create your free Addis-Eats account and start ordering delicious food in Addis Ababa.",
+};
+
 export default function RegisterPage() {
   return (
     <div className="mx-auto max-w-md px-6 py-10">

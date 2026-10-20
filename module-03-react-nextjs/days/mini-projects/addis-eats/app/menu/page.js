@@ -7,6 +7,11 @@ import FilterShell from "../components/FilterShell";
 
 export const revalidate = 60;
 
+export const metadata = {
+  title: "Menu",
+  description: "Browse our full menu of Ethiopian dishes, fast food, breakfast, drinks and desserts. Order online for delivery in Addis Ababa.",
+};
+
 // Server component — awaits and renders the dish list
 async function FoodList({ category }) {
   const filteredFoods =
