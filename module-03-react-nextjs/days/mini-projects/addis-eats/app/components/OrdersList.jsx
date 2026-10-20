@@ -2,42 +2,49 @@
 
 import useSWR from "swr";
 import { useState } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { fetcher } from "@/lib/fetcher";
 import { useDebounce } from "@/lib/useDebounce";
 
 export default function OrdersList({ fallbackData }) {
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
-  const PAGE_SIZE = 5;
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  // Debounce the search term — 300 ms
+  const [search, setSearch] = useState("");
+
+  // Page number lives in the URL query string — linkable and shareable
+  const page = Math.max(1, Number(searchParams.get("page") ?? 1));
+
+  function setPage(n) {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", String(n));
+    router.push(`${pathname}?${params.toString()}`);
+  }
+
+  // Debounce 300 ms — typing 5 chars fires one request, not five
   const debouncedSearch = useDebounce(search, 300);
 
-  // Ex 5: null key when search term is empty keeps the full list
-  // Ex 6: keepPreviousData stops the flash between searches
+  // Null key when search is empty → SWR skips the fetch, full list shown via fallbackData
   const key = debouncedSearch
     ? `/api/orders?search=${encodeURIComponent(debouncedSearch)}&page=${page}`
     : `/api/orders?page=${page}`;
 
-  const { data: orders = [], error, isLoading } = useSWR(
-    key,
-    fetcher,
-    {
-      fallbackData,          // Ex 4: server-rendered initial data
-      refreshInterval: 5000, // Ex 3: poll every 5 seconds
-      keepPreviousData: true, // Ex 6: no flash between searches / pages
-    }
-  );
+  const { data: orders = [], error, isLoading } = useSWR(key, fetcher, {
+    fallbackData,           // server-rendered first page — no spinner on first paint
+    refreshInterval: 5000,  // poll every 5 s — order status updates appear automatically
+    keepPreviousData: true, // stale list stays visible while next fetch resolves — no flash
+  });
 
-  const totalPages = Math.ceil(orders.length / PAGE_SIZE) || 1;
-  const paged = orders.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  const PAGE_SIZE = 5;
+  const totalPages = Math.max(1, Math.ceil(orders.length / PAGE_SIZE));
 
   return (
     <div className="mt-6">
-      {/* Debounced search — Ex 5 */}
+      {/* Debounced search box */}
       <input
         type="text"
-        placeholder="Search orders…"
+        placeholder="Search by name or address…"
         value={search}
         onChange={(e) => { setSearch(e.target.value); setPage(1); }}
         className="w-full rounded-lg border border-gray-300 px-4 py-2.5 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
@@ -52,11 +59,11 @@ export default function OrdersList({ fallbackData }) {
       )}
 
       {!error && orders.length === 0 && !isLoading && (
-        <p className="mt-4 text-gray-500">No orders yet.</p>
+        <p className="mt-4 text-gray-500">No orders found.</p>
       )}
 
       <ul className="mt-4 space-y-3">
-        {paged.map((order) => (
+        {orders.map((order) => (
           <li key={order.id} className="rounded-xl bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between">
               <span className="font-semibold text-gray-900">#{order.id}</span>
@@ -74,11 +81,11 @@ export default function OrdersList({ fallbackData }) {
         ))}
       </ul>
 
-      {/* Paging — Ex 7 */}
+      {/* Paging — page number lives in ?page=N, shareable URL */}
       {totalPages > 1 && (
         <div className="mt-6 flex items-center justify-center gap-3">
           <button
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            onClick={() => setPage(Math.max(1, page - 1))}
             disabled={page === 1}
             className="rounded-lg border px-4 py-2 text-sm font-medium disabled:opacity-40 hover:bg-gray-50"
           >
@@ -86,7 +93,7 @@ export default function OrdersList({ fallbackData }) {
           </button>
           <span className="text-sm text-gray-600">Page {page} of {totalPages}</span>
           <button
-            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            onClick={() => setPage(Math.min(totalPages, page + 1))}
             disabled={page === totalPages}
             className="rounded-lg border px-4 py-2 text-sm font-medium disabled:opacity-40 hover:bg-gray-50"
           >

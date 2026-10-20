@@ -35,6 +35,14 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+## Network tab — what you see while typing in the orders search
+
+- Typing quickly fires **zero** requests until 300 ms after the last keystroke (debounce).
+- One request fires with the final debounced term — not one per character.
+- While that request is in-flight the previous list stays on screen (`keepPreviousData`).
+- Every 5 seconds a background poll fires regardless of search state (`refreshInterval`).
+- Two components using the same SWR key share one network call — no duplicate requests.
+
 ## API Endpoints
 
 | Method | Endpoint           | Success       | Error                          | Notes                              |
