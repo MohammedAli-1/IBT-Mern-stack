@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createOrder } from "@/app/Data/orders";
+import { getSession } from "@/lib/session";
 
 // Validation — same rules as the API route
 function validate(fields) {
@@ -42,7 +43,7 @@ export async function submitOrder(prevState, formData) {
     return { success: false, fieldErrors };
   }
 
-  const order = createOrder(fields);
+  const order = createOrder({ ...fields, owner: (await getSession())?.id ?? null });
 
   // Revalidate the orders page so it reflects the new order on next visit
   revalidatePath("/orders");
