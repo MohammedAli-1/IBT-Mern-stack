@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { decodeSession, COOKIE_NAME } from "@/lib/session";
 
-// Ex 3: matcher covers only /checkout and /orders (and their sub-paths)
 export const config = {
   matcher: ["/checkout", "/checkout/:path*", "/orders", "/orders/:path*", "/kitchen", "/kitchen/:path*"],
 };
