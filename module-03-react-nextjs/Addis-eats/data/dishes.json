@@ -1,0 +1,122 @@
+[
+  {
+    "id": "1",
+    "name": "Doro Wat",
+    "description": "Ethiopia's beloved slow-cooked chicken stew in a rich berbere sauce, served with injera.",
+    "price": 280,
+    "category": "Main",
+    "neighbourhood": "Bole",
+    "image": "https://images.unsplash.com/photo-1567364816519-cbc9c4ffe1eb?w=800&q=80",
+    "available": true
+  },
+  {
+    "id": "2",
+    "name": "Tibs",
+    "description": "Sautéed beef or lamb with onions, tomatoes, jalapeños, and rosemary. A favourite at every gathering.",
+    "price": 320,
+    "category": "Main",
+    "neighbourhood": "Kazanchis",
+    "image": "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80",
+    "available": true
+  },
+  {
+    "id": "3",
+    "name": "Shiro",
+    "description": "Creamy chickpea stew seasoned with berbere and niter kibbeh. Served with fresh injera.",
+    "price": 180,
+    "category": "Vegetarian",
+    "neighbourhood": "Megenagna",
+    "image": "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=80",
+    "available": true
+  },
+  {
+    "id": "4",
+    "name": "Kitfo",
+    "description": "Ethiopian beef tartare minced with mitmita spice and niter kibbeh. Served raw, medium, or well-done.",
+    "price": 350,
+    "category": "Main",
+    "neighbourhood": "Bole",
+    "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80",
+    "available": true
+  },
+  {
+    "id": "5",
+    "name": "Misir Wot",
+    "description": "Hearty red lentil stew with berbere and caramelised onions. A staple fasting dish.",
+    "price": 160,
+    "category": "Vegetarian",
+    "neighbourhood": "Kazanchis",
+    "image": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&q=80",
+    "available": true
+  },
+  {
+    "id": "6",
+    "name": "Gored Gored",
+    "description": "Cubed raw beef marinated in awaze and niter kibbeh — bold, aromatic, and deeply traditional.",
+    "price": 370,
+    "category": "Main",
+    "neighbourhood": "Megenagna",
+    "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    "available": true
+  },
+  {
+    "id": "7",
+    "name": "Injera Firfir",
+    "description": "Torn injera pieces tossed in spicy berbere sauce — a satisfying breakfast or light meal.",
+    "price": 120,
+    "category": "Breakfast",
+    "neighbourhood": "Bole",
+    "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80",
+    "available": true
+  },
+  {
+    "id": "8",
+    "name": "Ayib be Gomen",
+    "description": "Fresh Ethiopian cottage cheese served with collard greens and spiced butter.",
+    "price": 140,
+    "category": "Vegetarian",
+    "neighbourhood": "Megenagna",
+    "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80",
+    "available": true
+  },
+  {
+    "id": "9",
+    "name": "Tej",
+    "description": "Traditional Ethiopian honey wine, lightly fermented and served in a berele flask.",
+    "price": 90,
+    "category": "Drinks",
+    "neighbourhood": "Kazanchis",
+    "image": "https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?w=800&q=80",
+    "available": true
+  },
+  {
+    "id": "10",
+    "name": "Sambusa",
+    "description": "Crispy fried pastry filled with spiced lentils or minced beef. Perfect as a starter.",
+    "price": 80,
+    "category": "Starters",
+    "neighbourhood": "Bole",
+    "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
+    "available": true
+  },
+  {
+    "id": "11",
+    "name": "Fatira",
+    "description": "Large pan-fried flatbread topped with scrambled eggs, honey, and spiced butter.",
+    "price": 110,
+    "category": "Breakfast",
+    "neighbourhood": "Kazanchis",
+    "image": "https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=800&q=80",
+    "available": true
+  },
+  {
+    "id": "12",
+    "name": "Kategna",
+    "description": "Toasted injera brushed with berbere and niter kibbeh — the perfect crispy snack.",
+    "price": 70,
+    "category": "Starters",
+    "neighbourhood": "Megenagna",
+    "image": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=800&q=80",
+    "available": true
+  }
+]

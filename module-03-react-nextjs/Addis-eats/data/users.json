@@ -1,0 +1,38 @@
+[
+  {
+    "id": "u1",
+    "name": "Abebe Girma",
+    "email": "abebe@addiseats.test",
+    "passwordHash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+    "role": "customer",
+    "phone": "+251911000001",
+    "address": "Bole Road, Addis Ababa"
+  },
+  {
+    "id": "u2",
+    "name": "Tigist Bekele",
+    "email": "tigist@addiseats.test",
+    "passwordHash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+    "role": "customer",
+    "phone": "+251911000002",
+    "address": "Kazanchis, Addis Ababa"
+  },
+  {
+    "id": "u3",
+    "name": "Dawit Staff",
+    "email": "dawit@addiseats.test",
+    "passwordHash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+    "role": "staff",
+    "phone": "+251911000003",
+    "address": "Megenagna, Addis Ababa"
+  },
+  {
+    "id": "u4",
+    "name": "Sara Haile",
+    "email": "sara@addiseats.test",
+    "passwordHash": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+    "role": "staff",
+    "phone": "+251911000004",
+    "address": "Bole, Addis Ababa"
+  }
+]
