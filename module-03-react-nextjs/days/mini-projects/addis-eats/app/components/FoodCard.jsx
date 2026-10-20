@@ -1,12 +1,18 @@
 import Link from "next/link";
+import Image from "next/image";
+
 export default function FoodCard({ food }) {
   return (
     <article className="overflow-hidden rounded-2xl bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
-      <img
-        src={food.image}
-        alt={food.name}
-        className="h-48 w-full object-cover"
-      />
+      <div className="relative h-48 w-full">
+        <Image
+          src={food.image}
+          alt={food.name}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className="object-cover"
+        />
+      </div>
 
       <div className="p-5">
         <div className="flex items-start justify-between gap-4">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import foods from "@/app/Data/foods";
 import AddToCartButton from "@/app/components/AddToCartButton";
 // Revalidate eligible static pages after 60 seconds
@@ -37,11 +38,17 @@ export default async function DishPage({ params }) {
       </Link>
 
       <article className="overflow-hidden rounded-2xl border shadow-sm">
-        <img
-          src={food.image}
-          alt={food.name}
-          className="h-72 w-full object-cover"
-        />
+        {/* priority on the hero — largest above-the-fold image, improves LCP */}
+        <div className="relative h-72 w-full">
+          <Image
+            src={food.image}
+            alt={food.name}
+            fill
+            sizes="(max-width: 896px) 100vw, 896px"
+            className="object-cover"
+            priority
+          />
+        </div>
 
         <div className="space-y-4 p-6">
           <p className="text-sm font-semibold uppercase tracking-wide text-orange-600">
