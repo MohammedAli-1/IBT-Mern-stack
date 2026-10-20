@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createOrder } from "@/app/Data/orders";
+import { createOrder, orders } from "@/app/Data/orders";
 
 // Validation schema matching Day 33 shape
 function validate(body) {
@@ -19,6 +19,27 @@ function validate(body) {
   }
 
   return fieldErrors;
+}
+
+// GET /api/orders — returns orders, supports ?search and ?page
+export function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const search = searchParams.get("search")?.toLowerCase() ?? "";
+  const page = Math.max(1, Number(searchParams.get("page") ?? 1));
+  const PAGE_SIZE = 5;
+
+  const filtered = search
+    ? orders.filter(
+        (o) =>
+          o.name?.toLowerCase().includes(search) ||
+          o.address?.toLowerCase().includes(search)
+      )
+    : orders;
+
+  const paged = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  return NextResponse.json(paged, {
+    headers: { "x-total-count": String(filtered.length) },
+  });
 }
 
 // POST /api/orders — validates body, returns 422 with fieldErrors or 201 with order
