@@ -1,6 +1,8 @@
 import { cookies } from "next/headers";
 
 export default async function CheckoutPage() {
+  // cookies() opts this route into dynamic rendering — the session cookie is
+  // request-specific so the page cannot be pre-rendered at build time.
   const cookieStore = await cookies();
   const session = cookieStore.get("session");
 
