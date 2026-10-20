@@ -37,17 +37,39 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## First Load JS — /menu (Exercise 7)
 
-| State | First Load JS |
-|-------|--------------|
-| Before (FoodList inline in page, no FilterShell) | ~102 kB |
-| After (FilterShell client boundary + children pattern) | ~102 kB |
+### Build output (current)
 
-The size stays roughly the same because `FilterShell` is tiny and the real saving
-comes from the **shape** of the boundary: the server-rendered `FoodList` HTML is
-never included in the JS bundle regardless. What the children pattern prevents is
-accidentally pulling server-only imports (e.g. a DB call) into a client chunk —
-Next.js will error at build time if you try, which is the real safety guarantee.
+```
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /cart
+├ ƒ /checkout
+├ ○ /login
+├ ƒ /menu
+├   /menu/[id]
+│ ├ ● /menu/1
+│ ├ ● /menu/2
+│ ├ ● /menu/3
+│ └ ● [+12 more paths]
+├ ○ /orders
+└ ○ /register
 
-The meaningful reduction happens when you move `"use client"` off a large page
-and onto a small leaf (e.g. `CartItem` vs the whole `cart/page.js`): the page
-shell is now zero-JS on the client; only the interactive leaf ships JS.
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+```
+
+### Before vs After — FilterShell boundary
+
+| State | /menu First Load JS | Notes |
+|-------|---------------------|-------|
+| Before — `FoodList` inline in page, no client boundary | ~102 kB | Entire page subtree could pull client deps |
+| After — `FilterShell` wraps children as a client boundary | ~102 kB | Server `FoodList` HTML never enters the JS bundle |
+
+The bundle size stays similar because `FilterShell` itself is tiny.
+The real gain is architectural: the **children pattern** means the server-rendered
+dish list is passed as already-resolved RSC payload — Next.js will throw a build
+error if you accidentally import a server-only module (DB call, `fs`, etc.) inside
+a client component. Moving `"use client"` to the smallest leaf (e.g. `CartItem`
+instead of the whole `cart/page.js`) is where measurable JS savings appear.
