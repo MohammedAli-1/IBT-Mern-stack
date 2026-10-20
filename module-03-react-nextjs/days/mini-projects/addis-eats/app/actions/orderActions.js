@@ -51,32 +51,26 @@ export async function submitOrder(prevState, formData) {
   return { success: true, orderId: order.id };
 }
 
-// cancelOrder — checks session cookie and record ownership before writing
+// cancelOrder — checks session and record ownership before writing
 export async function cancelOrder(orderId) {
-  const { cookies } = await import("next/headers");
   const { orders } = await import("@/app/Data/orders");
 
-  const cookieStore = await cookies();
-  const session = cookieStore.get("session");
-
-  // Must be logged in
-  if (!session?.value) {
+  // Session and ownership both checked inside every action that writes
+  const session = await getSession();
+  if (!session) {
     return { success: false, error: "Unauthorised — no session." };
   }
 
   const order = orders.find((o) => o.id === orderId);
-
   if (!order) {
     return { success: false, error: "Order not found." };
   }
 
-  // Owner check — session value must match the order's owner field
-  if (order.owner && order.owner !== session.value) {
+  if (order.owner && order.owner !== session.id) {
     return { success: false, error: "Forbidden — you do not own this order." };
   }
 
   order.status = "cancelled";
   revalidatePath("/orders");
-
   return { success: true };
 }
