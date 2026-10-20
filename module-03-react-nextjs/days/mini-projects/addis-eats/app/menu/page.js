@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import foods from "../Data/foods";
 import Link from "next/link";
+import Image from "next/image";
 import AddToCartButton from "../components/AddToCartButton";
 import FilterShell from "../components/FilterShell";
 
@@ -18,11 +19,13 @@ async function FoodList({ category }) {
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         {filteredFoods.map((food) => (
           <article key={food.id} className="rounded-xl bg-white p-4 shadow-sm">
-            <div className="h-[350px] md:h-[400px]">
-              <img
+            <div className="relative h-[350px] md:h-[400px]">
+              <Image
                 src={food.image}
                 alt={food.name}
-                className="h-full w-full object-cover"
+                fill
+                sizes="(max-width: 640px) 100vw, 50vw"
+                className="object-cover"
               />
             </div>
             <h2 className="text-lg font-semibold">{food.name}</h2>

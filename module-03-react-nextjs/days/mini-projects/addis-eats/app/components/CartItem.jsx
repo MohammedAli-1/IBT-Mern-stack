@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCart } from "../context/cartContext";
 
 // Only this component needs interactivity — quantity controls and remove button
@@ -9,11 +10,15 @@ export default function CartItem({ item }) {
   return (
     <article className="rounded-2xl bg-white p-4 shadow-sm transition hover:shadow-md">
       <div className="flex flex-col gap-5 sm:flex-row">
-        <img
-          src={item.image}
-          alt={item.name}
-          className="h-40 w-full rounded-xl object-cover sm:h-32 sm:w-32"
-        />
+        <div className="relative h-40 w-full shrink-0 rounded-xl overflow-hidden sm:h-32 sm:w-32">
+          <Image
+            src={item.image}
+            alt={item.name}
+            fill
+            sizes="(max-width: 640px) 100vw, 128px"
+            className="object-cover"
+          />
+        </div>
 
         <div className="flex flex-1 flex-col justify-between">
           <div className="flex items-start justify-between gap-4">
