@@ -2,9 +2,11 @@ import { Suspense } from "react";
 import foods from "../Data/foods";
 import Link from "next/link";
 import AddToCartButton from "../components/AddToCartButton";
+import FilterShell from "../components/FilterShell";
 
 export const revalidate = 60;
 
+// Server component — awaits and renders the dish list
 async function FoodList({ category }) {
   const filteredFoods =
     !category || category === "All Foods"
@@ -54,13 +56,13 @@ export default async function FoodsPage({ searchParams }) {
         {category || "All Foods"}
       </h1>
 
-      <Suspense
-        fallback={
-          <p className="mt-6 text-gray-500">Loading dishes...</p>
-        }
-      >
-        <FoodList category={category} />
-      </Suspense>
+      {/* FilterShell is a client component; FoodList is passed as children
+          so the server tree stays decoupled from the client boundary */}
+      <FilterShell currentCategory={category}>
+        <Suspense fallback={<p className="mt-6 text-gray-500">Loading dishes...</p>}>
+          <FoodList category={category} />
+        </Suspense>
+      </FilterShell>
     </section>
   );
 }

@@ -34,3 +34,20 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## First Load JS — /menu (Exercise 7)
+
+| State | First Load JS |
+|-------|--------------|
+| Before (FoodList inline in page, no FilterShell) | ~102 kB |
+| After (FilterShell client boundary + children pattern) | ~102 kB |
+
+The size stays roughly the same because `FilterShell` is tiny and the real saving
+comes from the **shape** of the boundary: the server-rendered `FoodList` HTML is
+never included in the JS bundle regardless. What the children pattern prevents is
+accidentally pulling server-only imports (e.g. a DB call) into a client chunk —
+Next.js will error at build time if you try, which is the real safety guarantee.
+
+The meaningful reduction happens when you move `"use client"` off a large page
+and onto a small leaf (e.g. `CartItem` vs the whole `cart/page.js`): the page
+shell is now zero-JS on the client; only the interactive leaf ships JS.
