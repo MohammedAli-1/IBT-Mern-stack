@@ -35,6 +35,21 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+## API Endpoints
+
+| Method | Endpoint           | Success       | Error                          | Notes                              |
+| ------ | ------------------ | ------------- | ------------------------------ | ---------------------------------- |
+| GET    | `/api/dishes`      | 200 — array   | —                              | Returns the full menu as JSON.     |
+| GET    | `/api/dishes/[id]` | 200 — object  | 404 `{ error, message }`       | Unknown id returns honest 404.     |
+| POST   | `/api/orders`      | 201 — order   | 422 `{ error, fieldErrors }`   | Validates name, phone, address, items. |
+
+### Server Actions
+
+| Action          | Trigger         | On success                        | On failure                   |
+| --------------- | --------------- | --------------------------------- | ---------------------------- |
+| `submitOrder`   | Checkout form   | Returns `{ success, orderId }`, calls `revalidatePath("/orders")` | Returns `{ success: false, fieldErrors }` |
+| `cancelOrder`   | Orders page     | Sets `order.status = "cancelled"`, calls `revalidatePath("/orders")` | Returns `{ success: false, error }` — 401 if no session, 403 if not owner |
+
 ## First Load JS — /menu (Exercise 7)
 
 ### Build output (current — Next.js 16.3.6 with Turbopack)
