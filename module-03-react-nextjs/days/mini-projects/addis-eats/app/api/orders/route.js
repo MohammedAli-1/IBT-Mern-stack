@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import { createOrder, orders } from "@/app/Data/orders";
+import { createOrder } from "@/app/Data/orders";
+import { getSession } from "@/lib/session";
+import { getOrdersByOwner } from "@/app/Data/orders";
 
 // Validation schema matching Day 33 shape
 function validate(body) {
@@ -21,20 +23,24 @@ function validate(body) {
   return fieldErrors;
 }
 
-// GET /api/orders — returns orders, supports ?search and ?page
-export function GET(request) {
+// GET /api/orders — returns orders scoped to the session owner (Ex 6)
+export async function GET(request) {
+  const session = await getSession();
+  // Return only this user's orders — trying another account returns empty
+  const userOrders = session ? getOrdersByOwner(session.id) : [];
+
   const { searchParams } = new URL(request.url);
   const search = searchParams.get("search")?.toLowerCase() ?? "";
   const page = Math.max(1, Number(searchParams.get("page") ?? 1));
   const PAGE_SIZE = 5;
 
   const filtered = search
-    ? orders.filter(
+    ? userOrders.filter(
         (o) =>
           o.name?.toLowerCase().includes(search) ||
           o.address?.toLowerCase().includes(search)
       )
-    : orders;
+    : userOrders;
 
   const paged = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
   return NextResponse.json(paged, {

@@ -12,3 +12,8 @@ export function createOrder(data) {
   orders.push(order);
   return order;
 }
+
+// Find orders belonging to a specific user session id
+export function getOrdersByOwner(ownerId) {
+  return orders.filter((o) => o.owner === ownerId);
+}

@@ -1,9 +1,17 @@
-export default function LoginPage() {
+import { useActionState } from "react";
+import LoginForm from "../components/LoginForm";
+
+export default async function LoginPage({ searchParams }) {
+  const { next } = await searchParams;
+
+  // Ex 5: only pass next if it starts with a slash — reject open redirects
+  const safeNext = next?.startsWith("/") ? next : "/";
+
   return (
     <div className="mx-auto max-w-md px-6 py-10">
-      <h1 className="text-3xl font-bold">Login</h1>
-
+      <h1 className="text-3xl font-bold text-gray-900">Login</h1>
       <p className="mt-2 text-gray-600">Login to your Addis-Eats account.</p>
+      <LoginForm next={safeNext} />
     </div>
   );
 }
