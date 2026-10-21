@@ -5,7 +5,7 @@ export const config = {
   matcher: ["/checkout", "/checkout/:path*", "/orders", "/orders/:path*", "/kitchen", "/kitchen/:path*"],
 };
 
-export async function middleware(request) {
+export async function proxy(request) {
   const token = request.cookies.get(COOKIE_NAME)?.value;
   const session = await decodeSession(token);
 
