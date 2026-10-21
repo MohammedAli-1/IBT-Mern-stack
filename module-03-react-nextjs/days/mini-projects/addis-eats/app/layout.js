@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Providers from "./components/Providers";
+import { getSession } from "@/lib/session";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,7 +27,9 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await getSession();
+
   return (
     <html
       lang="en"
@@ -35,7 +38,7 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col bg-orange-50">
         <Providers>
           <main className="flex-1">
-            <Navbar />
+            <Navbar role={session?.role} />
             {children}
             <Footer />
           </main>
