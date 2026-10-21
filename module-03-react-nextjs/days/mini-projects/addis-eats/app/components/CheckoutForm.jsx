@@ -78,7 +78,7 @@ export default function CheckoutForm() {
       <button
         type="submit"
         disabled={isPending}
-        className="w-full rounded-xl bg-orange-600 px-6 py-3.5 font-semibold text-white transition hover:bg-orange-700 disabled:opacity-60"
+        className="w-full rounded-xl bg-orange-600 px-6 py-3.5 font-semibold text-white transition hover:bg-orange-700 disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1"
       >
         {isPending ? "Placing order…" : "Place Order"}
       </button>
