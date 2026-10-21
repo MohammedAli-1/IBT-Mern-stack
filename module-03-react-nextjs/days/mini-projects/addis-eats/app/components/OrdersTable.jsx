@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { when, etb } from "@/lib/format";
 
 const PAGE_SIZE = 5;
 
@@ -120,12 +121,11 @@ export default function OrdersTable({ orders, sort, dir, page }) {
                       {order.status}
                     </span>
                   </td>
-                  {/* Ex 5: right-aligned totals */}
                   <td className="px-4 py-3 text-right font-medium text-gray-900">
-                    {total.toLocaleString()}
+                    {etb(total)}
                   </td>
                   <td className="px-4 py-3 text-gray-500">
-                    {order.createdAt?.slice(0, 10) ?? "—"}
+                    {when(order.createdAt)}
                   </td>
                 </tr>
               );
