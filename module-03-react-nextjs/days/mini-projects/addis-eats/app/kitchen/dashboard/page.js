@@ -5,6 +5,7 @@ import { aggregateOrders } from "@/lib/aggregateOrders";
 import RevenueChart from "@/app/components/RevenueChart";
 import OrdersLineChart from "@/app/components/OrdersLineChart";
 import OrdersTable from "@/app/components/OrdersTable";
+import CsvExportButton from "@/app/components/CsvExportButton";
 
 export const metadata = { title: "Kitchen Dashboard" };
 
@@ -65,9 +66,12 @@ export default async function DashboardPage({ searchParams }) {
         </div>
       </section>
 
-      {/* Ex 5, 6, 7: sortable, paginated orders table */}
+      {/* Ex 5, 6, 7: sortable, paginated orders table + CSV export */}
       <section className="mt-8">
-        <h2 className="text-lg font-semibold text-gray-900">All Orders</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-gray-900">All Orders</h2>
+          <CsvExportButton orders={source} />
+        </div>
         <OrdersTable orders={source} sort={sort} dir={dir} page={page} />
       </section>
     </div>

@@ -77,6 +77,9 @@ export default function OrdersList({ fallbackData }) {
             </div>
             <p className="mt-1 text-sm text-gray-600">{order.name} · {order.phone}</p>
             <p className="text-sm text-gray-500">{order.address}</p>
+            <a href={`/orders/${order.id}`} className="mt-2 inline-block text-xs text-orange-600 hover:underline">
+              Track order →
+            </a>
           </li>
         ))}
       </ul>
