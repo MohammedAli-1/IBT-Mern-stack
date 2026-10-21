@@ -38,7 +38,7 @@ export default async function RootLayout({ children }) {
       <body className="min-h-full flex flex-col bg-orange-50">
         <Providers>
           <main className="flex-1">
-            <Navbar role={session?.role} />
+            <Navbar role={session?.role} user={session ? { email: session.email } : null} />
             {children}
             <Footer />
           </main>
