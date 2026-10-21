@@ -90,7 +90,7 @@ export default function OrdersList({ fallbackData }) {
           <button
             onClick={() => setPage(Math.max(1, page - 1))}
             disabled={page === 1}
-            className="rounded-lg border px-4 py-2 text-sm font-medium disabled:opacity-40 hover:bg-gray-50"
+            className="min-h-[44px] rounded-lg border px-4 py-2 text-sm font-medium disabled:opacity-40 hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
           >
             ← Prev
           </button>
@@ -98,7 +98,7 @@ export default function OrdersList({ fallbackData }) {
           <button
             onClick={() => setPage(Math.min(totalPages, page + 1))}
             disabled={page === totalPages}
-            className="rounded-lg border px-4 py-2 text-sm font-medium disabled:opacity-40 hover:bg-gray-50"
+            className="min-h-[44px] rounded-lg border px-4 py-2 text-sm font-medium disabled:opacity-40 hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
           >
             Next →
           </button>
