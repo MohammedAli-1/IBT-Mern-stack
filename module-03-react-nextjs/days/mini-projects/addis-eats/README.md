@@ -35,6 +35,34 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+## Deployment
+
+### Pre-flight checklist
+
+- [ ] `npm run build` passes with no errors
+- [ ] No secrets prefixed `NEXT_PUBLIC_`
+- [ ] `.env.example` committed, `.env.local` gitignored
+- [ ] Every private route redirects to `/login` in a private window
+- [ ] OG image appears when the live URL is pasted into a social card debugger
+- [ ] `/sitemap.xml` loads and contains no private routes
+- [ ] `/robots.txt` disallows `/cart`, `/checkout`, `/orders`, `/kitchen`
+- [ ] A rapid double-tap on Place Order creates one order, not two (submit disabled while pending)
+- [ ] Keyboard-only: Tab through the entire checkout flow without a mouse
+
+### Live URL
+
+> Add your Vercel URL here after deployment
+
+### Roll back
+
+```bash
+# List recent deployments
+vercel ls
+
+# Promote a previous deployment instantly
+vercel rollback [deployment-url]
+```
+
 ## Performance measurement (PERF.md)
 
 Run `npm run build && npm start`, then measure in Chrome DevTools Lighthouse with:
