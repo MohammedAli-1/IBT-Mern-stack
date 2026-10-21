@@ -104,8 +104,8 @@ export default function OrdersLineChart({ data }) {
           <caption className="sr-only">Orders per day</caption>
           <thead>
             <tr className="border-b">
-              <th className="py-1 text-left font-medium text-gray-700">Date</th>
-              <th className="py-1 text-right font-medium text-gray-700">Orders</th>
+              <th scope="col" className="py-1 text-left font-medium text-gray-700">Date</th>
+              <th scope="col" className="py-1 text-right font-medium text-gray-700">Orders</th>
             </tr>
           </thead>
           <tbody>

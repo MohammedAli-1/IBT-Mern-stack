@@ -12,11 +12,24 @@ export default async function DashboardPage({ searchParams }) {
   const session = await getSession();
   if (!session || session.role !== "staff") redirect("/");
 
-  // Ex 1: aggregate server-side — only the summary goes to the client
-  const { revenueData, countData, totalRevenue, totalOrders } =
-    aggregateOrders(orders);
+  const { sort, dir, page, demo } = await searchParams;
 
-  const { sort, dir, page } = await searchParams;
+  // Demonstrable states — ?demo=empty or ?demo=error
+  if (demo === "error") {
+    return (
+      <div className="mx-auto max-w-5xl px-6 py-10">
+        <h1 className="text-3xl font-bold text-gray-900">Kitchen Dashboard</h1>
+        <div className="mt-10 rounded-xl bg-red-50 p-8 text-center">
+          <p className="text-lg font-semibold text-red-700">Failed to load dashboard data.</p>
+          <p className="mt-2 text-sm text-red-600">Check the server logs and try again.</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Ex 1: aggregate server-side — only summarised rows cross the boundary
+  const source = demo === "empty" ? [] : orders;
+  const { revenueData, countData, totalRevenue, totalOrders } = aggregateOrders(source);
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-10">
@@ -55,7 +68,7 @@ export default async function DashboardPage({ searchParams }) {
       {/* Ex 5, 6, 7: sortable, paginated orders table */}
       <section className="mt-8">
         <h2 className="text-lg font-semibold text-gray-900">All Orders</h2>
-        <OrdersTable orders={orders} sort={sort} dir={dir} page={page} />
+        <OrdersTable orders={source} sort={sort} dir={dir} page={page} />
       </section>
     </div>
   );

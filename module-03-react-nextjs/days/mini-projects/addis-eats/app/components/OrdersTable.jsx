@@ -57,9 +57,10 @@ export default function OrdersTable({ orders, sort, dir, page }) {
           </caption>
           <thead className="border-b bg-gray-50">
             <tr>
-              <th className={colClass}>ID</th>
-              <th className={colClass}>Customer</th>
+              <th scope="col" className={colClass}>ID</th>
+              <th scope="col" className={colClass}>Customer</th>
               <th
+                scope="col"
                 className={`${colClass} ${sortClass}`}
                 aria-sort={ariaSortValue("status")}
               >
@@ -71,6 +72,7 @@ export default function OrdersTable({ orders, sort, dir, page }) {
                 </Link>
               </th>
               <th
+                scope="col"
                 className={`${colClass} text-right`}
                 aria-sort={ariaSortValue("total")}
               >
@@ -82,6 +84,7 @@ export default function OrdersTable({ orders, sort, dir, page }) {
                 </Link>
               </th>
               <th
+                scope="col"
                 className={`${colClass}`}
                 aria-sort={ariaSortValue("date")}
               >
