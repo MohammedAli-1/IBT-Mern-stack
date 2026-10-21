@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCart } from "../context/cartContext";
 
-export default function Navbar() {
+export default function Navbar({ role }) {
   const { totalItems } = useCart();
 
   return (
@@ -16,34 +16,29 @@ export default function Navbar() {
 
         {/* Navigation */}
         <div className="flex items-center gap-6">
-          <Link
-            href="/"
-            className="text-gray-700 transition hover:text-orange-600"
-          >
+          <Link href="/" className="text-gray-700 transition hover:text-orange-600">
             Home
           </Link>
 
-          <Link
-            href="/menu"
-            className="text-gray-700 transition hover:text-orange-600"
-          >
+          <Link href="/menu" className="text-gray-700 transition hover:text-orange-600">
             Menu
           </Link>
+
+          {/* Staff-only dashboard link */}
+          {role === "staff" && (
+            <Link href="/kitchen/dashboard" className="text-gray-700 transition hover:text-orange-600">
+              Dashboard
+            </Link>
+          )}
 
           <Link
             href="/cart"
             className="flex items-center text-gray-700 transition hover:text-orange-600"
           >
             Cart
-            {totalItems > 0 ? (
-              <span className="ml-2 flex h-6 min-w-6 items-center justify-center rounded-full bg-orange-600 px-1.5 text-xs font-bold text-white">
-                {totalItems}
-              </span>
-            ) : (
-              <span className="ml-2 flex h-6 min-w-6 items-center justify-center rounded-full bg-orange-600 px-1.5 text-xs font-bold text-white">
-                0
-              </span>
-            )}
+            <span className="ml-2 flex h-6 min-w-6 items-center justify-center rounded-full bg-orange-600 px-1.5 text-xs font-bold text-white">
+              {totalItems}
+            </span>
           </Link>
 
           <Link
