@@ -1,6 +1,11 @@
-// In-memory order store — resets on server restart.
+// In-memory order store using a global to survive Next.js hot-module reloads in dev.
 // Replace with a real DB in production.
-export const orders = [];
+
+if (!global._orders) {
+  global._orders = [];
+}
+
+export const orders = global._orders;
 
 export function createOrder(data) {
   const order = {
@@ -13,7 +18,6 @@ export function createOrder(data) {
   return order;
 }
 
-// Find orders belonging to a specific user session id
 export function getOrdersByOwner(ownerId) {
   return orders.filter((o) => o.owner === ownerId);
 }
