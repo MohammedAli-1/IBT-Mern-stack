@@ -24,6 +24,10 @@ export default function Navbar({ role }) {
             Menu
           </Link>
 
+          <Link href="/orders" className="text-gray-700 transition hover:text-orange-600">
+            Orders
+          </Link>
+
           {/* Staff-only dashboard link */}
           {role === "staff" && (
             <Link href="/kitchen/dashboard" className="text-gray-700 transition hover:text-orange-600">
