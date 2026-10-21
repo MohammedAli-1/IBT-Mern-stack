@@ -42,12 +42,8 @@ export default async function DishPage({ params }) {
     notFound();
   }
 
-  // Display when this page's HTML was rendered
-  const generatedAt = new Date().toLocaleString();
-
   return (
-    <main className="mx-auto max-w-4xl px-6 py-10">
-      {/* Ex 5: MenuItem JSON-LD generated from the same dish object */}
+    <main className="min-h-[80vh] bg-orange-50 py-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -56,54 +52,40 @@ export default async function DishPage({ params }) {
             "@type": "MenuItem",
             name: food.name,
             description: food.description,
-            offers: {
-              "@type": "Offer",
-              price: food.price,
-              priceCurrency: "ETB",
-              availability: "https://schema.org/InStock",
-            },
+            offers: { "@type": "Offer", price: food.price, priceCurrency: "ETB", availability: "https://schema.org/InStock" },
             image: food.image,
           }),
         }}
       />
-      <Link
-        href="/menu"
-        className="mb-6 inline-block text-orange-600 hover:text-orange-700"
-      >
-        ← Back to Menu
-      </Link>
 
-      <article className="overflow-hidden rounded-2xl border shadow-sm">
-        {/* priority on the hero — largest above-the-fold image, improves LCP */}
-        <div className="relative h-72 w-full">
-          <Image
-            src={food.image}
-            alt={food.name}
-            fill
-            sizes="(max-width: 896px) 100vw, 896px"
-            className="object-cover"
-            priority
-          />
-        </div>
+      <div className="mx-auto max-w-4xl px-4 sm:px-6">
+        <Link href="/menu" className="inline-flex items-center gap-1 text-sm font-medium text-orange-600 hover:text-orange-700">
+          ← Back to Menu
+        </Link>
 
-        <div className="space-y-4 p-6">
-          <p className="text-sm font-semibold uppercase tracking-wide text-orange-600">
-            {food.category}
-          </p>
-
-          <h1 className="text-3xl font-bold">{food.name}</h1>
-
-          <p className="leading-7 text-gray-600">{food.description}</p>
-
-          <p className="text-2xl font-bold text-orange-600">{food.price} ETB</p>
-
-          <div className="rounded-lg bg-gray-100 p-3 text-sm text-gray-600">
-            <strong>Page generated at:</strong> {generatedAt}
+        <article className="mt-5 overflow-hidden rounded-2xl bg-white shadow-sm">
+          <div className="relative h-80 w-full sm:h-96">
+            <Image src={food.image} alt={food.name} fill sizes="(max-width: 896px) 100vw, 896px" className="object-cover" priority />
+            <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-sm font-semibold text-orange-700 shadow">
+              {food.category}
+            </span>
           </div>
 
-          <AddToCartButton food={food} />
-        </div>
-      </article>
+          <div className="p-6 sm:p-8">
+            <h1 className="text-3xl font-extrabold text-gray-900">{food.name}</h1>
+            <p className="mt-3 text-base leading-7 text-gray-600">{food.description}</p>
+
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+              <p className="text-3xl font-bold text-orange-600">{food.price} ETB</p>
+              <AddToCartButton food={food} />
+            </div>
+
+            <div className="mt-6 rounded-xl bg-orange-50 p-4 text-sm text-gray-600">
+              🕒 Ready in 20–35 minutes &nbsp;·&nbsp; 🚚 Free delivery &nbsp;·&nbsp; ⭐ Fresh daily
+            </div>
+          </div>
+        </article>
+      </div>
     </main>
   );
 }

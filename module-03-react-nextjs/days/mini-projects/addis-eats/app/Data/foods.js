@@ -6,7 +6,7 @@ const foods = [
     description: "Traditional Ethiopian chicken stew served with injera.",
     price: 350,
     category: "Ethiopian",
-    image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=800",
+    image: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=800",
   },
   {
     id: 2,
@@ -14,8 +14,7 @@ const foods = [
     description: "Tender beef sautéed with onions, peppers, and spices.",
     price: 300,
     category: "Ethiopian",
-    image:
-      "https://commons.wikimedia.org/wiki/Special:Redirect/file/Tibs_1.jpg",
+    image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=800",
   },
   {
     id: 3,
@@ -23,8 +22,7 @@ const foods = [
     description: "Ethiopian chickpea stew served with fresh injera.",
     price: 180,
     category: "Ethiopian",
-    image:
-      "https://commons.wikimedia.org/wiki/Special:Redirect/file/Shiro_wet.jpg",
+    image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800",
   },
   {
     id: 4,
@@ -32,7 +30,7 @@ const foods = [
     description: "Minced beef seasoned with Ethiopian spices and butter.",
     price: 350,
     category: "Ethiopian",
-    image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=800",
+    image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800",
   },
 
   // Fast Food
@@ -94,17 +92,16 @@ const foods = [
     category: "Breakfast",
     image: "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=800",
   },
+  {
+    id: 12,
+    name: "Eggs & Toast",
+    description: "Scrambled eggs with toasted bread and butter.",
+    price: 120,
+    category: "Breakfast",
+    image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800",
+  },
 
   // Drinks
-  // {
-  //   id: 12,
-  //   name: "Fresh Mango Juice",
-  //   description: "Freshly prepared mango juice served chilled.",
-  //   price: 100,
-  //   category: "Drinks",
-  //   image:
-  //     "https://images.unsplash.com/photo-1605027990121-cbae9f7c7d6a?w=800",
-  // },
   {
     id: 13,
     name: "Fresh Orange Juice",
@@ -120,6 +117,14 @@ const foods = [
     price: 80,
     category: "Drinks",
     image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800",
+  },
+  {
+    id: 17,
+    name: "Mango Smoothie",
+    description: "Creamy fresh mango blended with milk and honey.",
+    price: 120,
+    category: "Drinks",
+    image: "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=800",
   },
 
   // Desserts
@@ -138,6 +143,14 @@ const foods = [
     price: 150,
     category: "Desserts",
     image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800",
+  },
+  {
+    id: 18,
+    name: "Baklava",
+    description: "Layered pastry filled with nuts and sweet syrup.",
+    price: 130,
+    category: "Desserts",
+    image: "https://images.unsplash.com/photo-1519676867240-f03562e64548?w=800",
   },
 ];
 

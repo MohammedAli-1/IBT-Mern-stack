@@ -30,28 +30,36 @@ async function FoodList({ category }) {
 
   return (
     <>
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">
+      <div className="mt-6 grid gap-6 sm:grid-cols-2">
         {filteredFoods.map((food) => (
-          <article key={food.id} className="rounded-xl bg-white p-4 shadow-sm">
-            <div className="relative h-[350px] md:h-[400px]">
+          <article key={food.id} className="group overflow-hidden rounded-2xl bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <div className="relative h-52">
               <Image
                 src={food.image}
                 alt={food.name}
                 fill
                 sizes="(max-width: 640px) 100vw, 50vw"
-                className="object-cover"
+                className="object-cover transition group-hover:scale-105"
               />
+              <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-0.5 text-xs font-semibold text-orange-700 shadow-sm">
+                {food.category}
+              </span>
             </div>
-            <h2 className="text-lg font-semibold">{food.name}</h2>
-            <p className="mt-2 text-gray-600">{food.price} ETB</p>
-            <div className="mt-3 flex items-center justify-between">
-              <Link
-                href={`/menu/${food.id}`}
-                className="font-semibold text-orange-600 hover:text-orange-700"
-              >
-                View Details →
-              </Link>
-              <AddToCartButton food={food} compact />
+            <div className="p-4">
+              <h2 className="font-bold text-gray-900">{food.name}</h2>
+              <p className="mt-1 text-sm text-gray-500 line-clamp-2">{food.description}</p>
+              <div className="mt-3 flex items-center justify-between">
+                <span className="text-lg font-bold text-orange-600">{food.price} ETB</span>
+                <div className="flex items-center gap-2">
+                  <Link
+                    href={`/menu/${food.id}`}
+                    className="rounded-lg border border-orange-200 px-3 py-1.5 text-sm font-medium text-orange-600 transition hover:bg-orange-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
+                  >
+                    Details
+                  </Link>
+                  <AddToCartButton food={food} compact />
+                </div>
+              </div>
             </div>
           </article>
         ))}
