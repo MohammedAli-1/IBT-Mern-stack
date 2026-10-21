@@ -35,18 +35,33 @@ export default async function OrderTrackingPage({ params }) {
         <OrderStatusStream orderId={order.id} initialStatus={order.status} />
       </div>
 
-      {/* Ex 1 & 2: dynamic map with courier + delivery markers */}
+      {/* Map + text info side by side — accessible to anyone who cannot see the map */}
       <div className="mt-6">
         <h2 className="mb-2 text-sm font-semibold text-gray-700">Delivery Map</h2>
-        <DeliveryMap
-          orderId={order.id}
-          courierPos={courierPos}
-          deliveryPos={deliveryPos}
-        />
-        <p className="mt-2 text-xs text-gray-500">
-          🛵 Courier at {courierPos[0].toFixed(3)}, {courierPos[1].toFixed(3)} →
-          📍 Delivery at {deliveryPos[0].toFixed(3)}, {deliveryPos[1].toFixed(3)}
-        </p>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+          {/* Map — explicit height prevents layout jump when it loads */}
+          <div className="min-w-0 flex-1">
+            <DeliveryMap
+              orderId={order.id}
+              courierPos={courierPos}
+              deliveryPos={deliveryPos}
+            />
+          </div>
+
+          {/* Same info in text for anyone who cannot see the map */}
+          <aside className="shrink-0 rounded-xl border bg-white p-4 text-sm sm:w-52">
+            <p className="font-semibold text-gray-700">Courier</p>
+            <p className="mt-1 text-gray-500">
+              🛵 {courierPos[0].toFixed(4)}, {courierPos[1].toFixed(4)}
+            </p>
+
+            <p className="mt-3 font-semibold text-gray-700">Delivery address</p>
+            <p className="mt-1 text-gray-500">{order.address}</p>
+            <p className="mt-1 text-gray-400 text-xs">
+              📍 {deliveryPos[0].toFixed(4)}, {deliveryPos[1].toFixed(4)}
+            </p>
+          </aside>
+        </div>
       </div>
 
       {/* Order summary */}
