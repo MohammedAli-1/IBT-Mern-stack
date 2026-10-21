@@ -39,7 +39,7 @@ export default function CsvExportButton({ orders }) {
   return (
     <button
       onClick={handleExport}
-      className="rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+      className="min-h-[44px] rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
     >
       Export CSV
     </button>

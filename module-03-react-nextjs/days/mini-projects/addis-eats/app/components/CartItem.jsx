@@ -34,17 +34,19 @@ export default function CartItem({ item }) {
           <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center rounded-lg border border-gray-200">
               <button
-                className="px-3 py-1.5 text-lg font-semibold text-gray-600 hover:bg-gray-100"
+                aria-label={`Decrease quantity of ${item.name}`}
+                className="flex h-11 w-11 items-center justify-center text-lg font-semibold text-gray-600 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded-l-lg"
                 onClick={() => decreaseQuantity(item.id)}
               >
                 −
               </button>
-              <span className="min-w-10 text-center font-semibold">
+              <span className="min-w-10 text-center font-semibold" aria-live="polite">
                 {item.quantity}
               </span>
               <button
+                aria-label={`Increase quantity of ${item.name}`}
                 onClick={() => increaseQuantity(item.id)}
-                className="px-3 py-1.5 text-lg font-semibold text-gray-600 hover:bg-gray-100"
+                className="flex h-11 w-11 items-center justify-center text-lg font-semibold text-gray-600 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 rounded-r-lg"
               >
                 +
               </button>
@@ -58,8 +60,9 @@ export default function CartItem({ item }) {
             </p>
 
             <button
+              aria-label={`Remove ${item.name} from cart`}
               onClick={() => removeFromCart(item.id)}
-              className="text-sm font-semibold text-red-500 transition hover:text-red-700"
+              className="min-h-[44px] min-w-[44px] rounded-lg px-3 text-sm font-semibold text-red-500 transition hover:bg-red-50 hover:text-red-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400"
             >
               Remove
             </button>
