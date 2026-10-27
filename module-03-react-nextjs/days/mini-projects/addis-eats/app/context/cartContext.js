@@ -63,6 +63,10 @@ export function CartProvider({ children }) {
     setCart((currentCart) => currentCart.filter((item) => item.id !== foodId));
   }
 
+  function clearCart() {
+    setCart([]);
+  }
+
   // Total number of food items
   const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
 
@@ -80,6 +84,7 @@ export function CartProvider({ children }) {
         increaseQuantity,
         decreaseQuantity,
         removeFromCart,
+        clearCart,
         totalItems,
         cartTotal,
       }}

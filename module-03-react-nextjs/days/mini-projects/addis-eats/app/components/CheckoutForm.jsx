@@ -1,20 +1,32 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { useCart } from "../context/cartContext";
 import { submitOrder } from "../actions/orderActions";
 
 const initialState = { success: false, fieldErrors: {} };
 
 export default function CheckoutForm() {
-  const { cart } = useCart();
+  const { cart, clearCart } = useCart();
   const [state, formAction, isPending] = useActionState(submitOrder, initialState);
+
+  // Clear the cart as soon as the order is confirmed
+  useEffect(() => {
+    if (state.success) clearCart();
+  }, [state.success]);
 
   if (state.success) {
     return (
-      <div className="rounded-xl bg-green-50 p-6 text-center">
-        <p className="text-2xl font-bold text-green-700">Order placed!</p>
+      <div className="rounded-xl bg-green-50 p-8 text-center">
+        <div className="text-5xl">🎉</div>
+        <p className="mt-3 text-2xl font-bold text-green-700">Order placed!</p>
         <p className="mt-2 text-green-600">Order ID: #{state.orderId}</p>
+        <a
+          href="/orders"
+          className="mt-5 inline-block rounded-xl bg-orange-600 px-6 py-3 font-semibold text-white hover:bg-orange-700"
+        >
+          View My Orders →
+        </a>
       </div>
     );
   }
