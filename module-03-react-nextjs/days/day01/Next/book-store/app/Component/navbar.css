@@ -1,95 +1,49 @@
-/* =========================
-   RESET
-========================= */
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-.site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 76px;
-
-  z-index: 9999;
-}
-
-/* =========================
-   NAVBAR
-========================= */
-
+/* Navbar */
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   width: 100%;
-  height: 76px;
-
-  background-color: #1f2937;
-
-  border-bottom: 1px solid #374151;
-
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 4px 16px rgb(15 23 42 / 5%);
 }
 
-/* =========================
-   NAVBAR CONTAINER
-========================= */
-
+/* Navbar container */
 .navbar-container {
-  width: 100%;
-  max-width: 1300px;
-
-  height: 100%;
-
+  width: min(100% - 40px, 1200px);
+  min-height: 76px;
   margin: 0 auto;
-
-  padding: 0 30px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 32px;
 }
 
-/* =========================
-   LOGO
-========================= */
-
+/* Logo */
 .logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-
-  color: white;
-
-  font-size: 25px;
-  font-weight: 700;
-
+  gap: 10px;
+  color: #111827;
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.7px;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .logo span {
-  font-size: 26px;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #fff7ed;
+  font-size: 1.4rem;
 }
 
-.logo:hover {
-  color: #60a5fa;
-}
-
-/* =========================
-   NAVIGATION
-========================= */
-
+/* Navigation links */
 .nav-links {
   display: flex;
   align-items: center;
@@ -97,77 +51,84 @@ body {
 }
 
 .nav-link {
-  display: block;
-
-  color: #d1d5db;
-
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 15px;
+  border-radius: 9px;
+  color: #4b5563;
+  font-size: 0.95rem;
+  font-weight: 600;
   text-decoration: none;
-
-  font-size: 16px;
-  font-weight: 500;
-
-  padding: 10px 15px;
-
-  border-radius: 7px;
-
-  transition: 0.2s ease;
+  white-space: nowrap;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .nav-link:hover {
-  color: white;
-
-  background-color: #374151;
+  color: #ea580c;
+  background: #fff7ed;
 }
 
-/* =========================
-   CHECKOUT
-========================= */
-
+/* Checkout button */
 .checkout-link {
-  background-color: #2563eb;
-
-  color: white;
+  margin-left: 4px;
+  padding: 12px 20px;
+  background: #ea580c;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgb(234 88 12 / 18%);
 }
 
 .checkout-link:hover {
-  background-color: #1d4ed8;
-
-  color: white;
+  background: #c2410c;
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 700px) {
-  .site-header,
-  .navbar {
-    height: auto;
-    min-height: 70px;
-  }
-
+/* Tablet and mobile */
+@media (max-width: 760px) {
   .navbar-container {
-    padding: 12px 18px;
-
+    width: calc(100% - 28px);
+    padding: 16px 0;
     flex-direction: column;
-
-    gap: 10px;
+    align-items: stretch;
+    gap: 14px;
   }
 
   .logo {
-    font-size: 22px;
+    align-self: flex-start;
   }
 
   .nav-links {
     width: 100%;
-
-    justify-content: center;
-
+    display: flex;
     flex-wrap: wrap;
+    gap: 6px;
   }
 
   .nav-link {
-    font-size: 14px;
-    padding: 7px 10px;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  .checkout-link {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .logo {
+    font-size: 1.35rem;
+  }
+
+  .nav-links {
+    gap: 4px;
+  }
+
+  .nav-link {
+    padding: 9px 10px;
+    font-size: 0.84rem;
   }
 }

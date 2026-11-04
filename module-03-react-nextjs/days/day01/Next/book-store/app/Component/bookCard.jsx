@@ -1,5 +1,5 @@
 import Link from "next/link";
-export function BookCard({ book }) {
+export default function BookCard({ book }) {
   return (
     <div className="book-card">
       <div className="book-image">📚</div>

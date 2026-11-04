@@ -1,15 +1,19 @@
-import { books } from "../../Data/book.js";
+// import { books } from "../../Data/book.js";
+import { getBookById } from "@/lib/books";
+import { getReviewById } from "@/lib/books";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import "./book-details.css";
+import AddToCartButton from "@/app/Component/AddToCartButton.jsx";
 
 export default async function BookDetails({ params }) {
   const { id } = await params;
-
-  const book = books.find((book) => book.id === parseInt(id));
-
+  const book = await getBookById(id);
+  // const book = books.find((book) => book.id === parseInt(id));
+  const review = await getReviewById(id);
+  console.log(book);
   if (!book) {
-   notFound();
+    notFound();
   }
 
   return (
@@ -59,13 +63,26 @@ export default async function BookDetails({ params }) {
               <p className="details-price">{book.price} ETB</p>
             </div>
 
-            <button className="cart-button">Add to Cart</button>
+            <AddToCartButton book={book} />
           </div>
 
           <Link href="/book" className="back-link">
             ← Back to Books
           </Link>
         </div>
+      </div>
+      <div>
+        {review.length > 0 ? (
+          review.map((rev) => (
+            <ul key={rev.id}>
+              <li>{rev.reviewer}</li>
+              <li>{rev.rating}</li>
+              <li>{rev.comment}</li>
+            </ul>
+          ))
+        ) : (
+          <p>No review</p>
+        )}
       </div>
     </main>
   );

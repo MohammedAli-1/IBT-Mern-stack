@@ -1,11 +1,13 @@
-import { books } from "../Data/book.js";
+// import { books } from "../Data/book.js";
+import { getBook } from "@/lib/books";
 import "./books.css";
-import { BookCard } from "../Component/bookCard.jsx";
+import BookCard from "../Component/bookCard.jsx";
 // import { resolve } from "styled-jsx/css";
 
 export default async function Books() {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+  // await new Promise((resolve) => setTimeout(resolve, 1000));
   // throw new Error("faild to load data");
+  const books = await getBook();
   return (
     <main className="books-page">
       <h1 className="books-title">Welcome to Book Page</h1>

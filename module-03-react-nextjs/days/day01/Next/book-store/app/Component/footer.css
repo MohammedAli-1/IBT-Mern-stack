@@ -1,40 +1,53 @@
 
+/* Footer */
 .footer {
-  background-color: #1f2937;
+  width: 100%;
+  margin-top: auto;
+  background: #111827;
   color: #d1d5db;
-  padding: 25px 0;
-  margin-top: 50px;
+  border-top: 3px solid #ea580c;
 }
 
+/* Footer container */
 .footer-container {
-  width: 90%;
-  max-width: 1200px;
+  width: min(100% - 40px, 1200px);
+  min-height: 90px;
   margin: 0 auto;
-
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  padding: 24px 0;
   text-align: center;
 }
 
+/* Copyright text */
 .footer p {
   margin: 0;
-  font-size: 14px;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  letter-spacing: 0.2px;
 }
 
+/* Your name */
 .footer span {
-  color: white;
-  font-weight: 600;
+  color: #fb923c;
+  font-weight: 700;
+  transition: color 0.2s ease;
 }
 
-/* Mobile */
+.footer span:hover {
+  color: #fdba74;
+}
+
+/* Mobile responsive */
 @media (max-width: 600px) {
-  .footer {
-    padding: 20px 10px;
+  .footer-container {
+    width: calc(100% - 28px);
+    min-height: 80px;
+    padding: 20px 0;
   }
 
   .footer p {
-    font-size: 13px;
+    font-size: 0.85rem;
   }
 }
-

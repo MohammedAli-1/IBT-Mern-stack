@@ -20,6 +20,10 @@ export default function Navbar() {
             Books
           </Link>
 
+          <Link href="/student" className="nav-link">
+            Student
+          </Link>
+
           <Link href="/cart" className="nav-link">
             🛒 Cart
           </Link>
