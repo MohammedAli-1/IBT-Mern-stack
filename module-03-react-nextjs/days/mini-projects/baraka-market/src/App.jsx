@@ -11,6 +11,8 @@ import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import OrderSuccess from "./pages/OrderSuccess";
+import form from "./pages/CheckOutForm";
+import Form from "./pages/CheckOutForm";
 
 function App() {
   return (
@@ -21,8 +23,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/form" element={<Form />} />
           <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="/wishlist" element={<Wishlist />} />
+
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-success" element={<OrderSuccess />} />

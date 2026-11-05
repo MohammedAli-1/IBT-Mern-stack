@@ -150,6 +150,12 @@ main button {
   background-color: #111;
   color: white;
 }
+.error {
+  text-align: center;
+  font-size: 40px;
+  font-family: monospace;
+  font-weight: bolder;
+}
 
 /* =========================
    RESPONSIVE

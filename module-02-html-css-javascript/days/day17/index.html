@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Employee Management</title>
+  </head>
+  <body>
+    <h1>Employee Management</h1>
+    <p>Welcome to the Employee Management System!</p>
+    <form action="post" method="POST" id="employeeForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+      <br />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      <br />
+      <label for="position">Position:</label>
+      <input type="text" id="position" name="position" required />
+      <br />
+      <button type="submit">Add Employee</button>
+    </form>
+    <h2>Employee List</h2>
+    <ul id="employeeList"></ul>
+    <form action="post" method="POST" id="removeForm">
+      <label for="removebyname">Name:</label>
+      <input type="text" id="removebyname" name="name" required />
+      <button type="submit">Remove Employee</button>
+    </form>
+    <hr />
+    <h2>Data Loaded From Remote Resource</h2>
+    <ul id="remoteDataList"></ul>
+    <script src="script.js" type="module"></script>
+  </body>
+</html>

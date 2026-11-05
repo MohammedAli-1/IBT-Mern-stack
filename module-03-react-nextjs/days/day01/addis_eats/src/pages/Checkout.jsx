@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import useCartStore from "../store/cartStore";
+
 import "./checkout.css";
 function validate(form) {
   const errors = {};

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Alex Rivera — Frontend Developer specializing in accessible, performant web interfaces.">
+  <meta name="author" content="Alex Rivera">
+
+
+  <meta property="og:title" content="Alex Rivera — Frontend Developer">
+  <meta property="og:description" content="Building accessible, fast, and well-crafted web interfaces.">
+  <meta property="og:type" content="website">
+
+  <title>Mohammed Ali — Full stack Developer</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📐</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Skip link: first focusable element on the page -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ============================================
+       HEADER — site identity + nav (1 per page)
+       ============================================ -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="#top" class="logo" aria-label="Alex Rivera — home">
+        <span class="logo-mark" aria-hidden="true">◈</span>
+        MAK
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navList">
+          <span class="sr-only">Menu</span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+        </button>
+        <ul id="navList" class="nav-list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact" class="nav-cta">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================================
+       MAIN — wraps ALL primary content (1 per page)
+       ============================================ -->
+  <main id="main">
+
+    <!-- HERO / INTRO -->
+    <section class="hero" id="top" aria-labelledby="hero-heading">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span class="dot" aria-hidden="true"></span>
+            Available for new projects
+          </p>
+          <!-- Exactly ONE <h1> per page -->
+          <h1 id="hero-heading">
+          <span> Hi, I'm Mohammed Ali </span> <br>
+          — Full Stack Developer
+          </h1>
+          <p class="hero-lead">
+            Full stack developer focused on creating robust, scalable applications with a strong emphasis on user experience and code quality.
+          </p>
+          <div class="hero-actions">
+            <a href="#work" class="btn btn-primary">View my work</a>
+            <a href="#contact" class="btn btn-ghost">Get in touch</a>
+          </div>
+        </div>
+
+        <div class="hero-spec" aria-hidden="true">
+          <div class="spec-card">
+            <div class="spec-row"><span>role</span><span>Full Stack Developer</span></div>
+            <div class="spec-row"><span>focus</span><span>Full stack development</span></div>
+            <div class="spec-row"><span>based</span><span>remote</span></div>
+            <div class="spec-row"><span>status</span><span class="status-ok">open to work</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about" aria-labelledby="about-heading">
+      <div class="wrap">
+        <p class="section-label">01 — About</p>
+        <h2 id="about-heading">A little about how I work</h2>
+        <div class="about-grid">
+          <p class="about-text">
+            I'm a frontend developer with three years of experience turning
+            designs into fast, accessible, maintainable code. I care about
+            the parts of a site users never consciously see: keyboard
+            navigation that just works, layouts that don't shift while
+            loading, and pages that stay fast even on a slow connection.
+          </p>
+          <dl class="about-facts">
+            <div>
+              <dt>Experience</dt>
+              <dd>3+ years</dd>
+            </div>
+            <div>
+              <dt>Stack</dt>
+              <dd>HTML, CSS, JavaScript, React</dd>
+            </div>
+            <div>
+              <dt>Currently</dt>
+              <dd>Freelance / open to full-time</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK / PROJECTS -->
+    <section class="work" id="work" aria-labelledby="work-heading">
+      <div class="wrap">
+        <p class="section-label">02 — Selected Work</p>
+        <h2 id="work-heading">Projects</h2>
+
+        <div class="project-grid">
+          <!-- Each project is a self-contained <article> -->
+          <article class="project-card">
+            <p class="project-index" aria-hidden="true">P-01</p>
+            <h3>Order tracking dashboard</h3>
+            <p>
+              Rebuilt a legacy dashboard used by 200+ warehouse staff daily.
+              Cut load time from 4.2s to 900ms and fixed keyboard-trap bugs
+              that had blocked screen-reader users for years.
+            </p>
+            <ul class="project-tags">
+              <li>React</li>
+              <li>TypeScript</li>
+              <li>a11y audit</li>
+            </ul>
+            <a href="#" class="project-link">
+              View case study <span aria-hidden="true">→</span>
+            </a>
+          </article>
+
+          <article class="project-card">
+            <p class="project-index" aria-hidden="true">P-02</p>
+            <h3>Donor portal redesign</h3>
+            <p>
+              Designed and built a donation flow for a nonprofit, reducing
+              form abandonment by 31% through clearer error states and a
+              single-column layout tested on real users.
+            </p>
+            <ul class="project-tags">
+              <li>HTML/CSS</li>
+              <li>Stripe API</li>
+              <li>UX research</li>
+            </ul>
+            <a href="#" class="project-link">
+              View case study <span aria-hidden="true">→</span>
+            </a>
+          </article>
+
+          <article class="project-card">
+            <p class="project-index" aria-hidden="true">P-03</p>
+            <h3>Component library</h3>
+            <p>
+              Built an internal design-system library adopted across 6
+              product teams, with full keyboard support and documented
+              usage guidelines for every component.
+            </p>
+            <ul class="project-tags">
+              <li>Storybook</li>
+              <li>CSS variables</li>
+              <li>Docs</li>
+            </ul>
+            <a href="#" class="project-link">
+              View case study <span aria-hidden="true">→</span>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="skills" id="skills" aria-labelledby="skills-heading">
+      <div class="wrap">
+        <p class="section-label">03 — Toolbox</p>
+        <h2 id="skills-heading">Skills</h2>
+        <ul class="skills-grid">
+          <li><span class="skill-name">HTML5</span><span class="skill-bar" style="--level:95%"></span></li>
+          <li><span class="skill-name">CSS3</span><span class="skill-bar" style="--level:90%"></span></li>
+          <li><span class="skill-name">JavaScript</span><span class="skill-bar" style="--level:85%"></span></li>
+          <li><span class="skill-name">React</span><span class="skill-bar" style="--level:80%"></span></li>
+          <li><span class="skill-name">Accessibility</span><span class="skill-bar" style="--level:88%"></span></li>
+          <li><span class="skill-name">Git</span><span class="skill-bar" style="--level:82%"></span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact" aria-labelledby="contact-heading">
+      <div class="wrap contact-grid">
+        <div>
+          <p class="section-label">04 — Contact</p>
+          <h2 id="contact-heading">Let's work together</h2>
+          <p class="contact-lead">
+            Have a project in mind, or just want to say hi? My inbox is open.
+          </p>
+          <ul class="contact-links">
+            <li><a href="mailto:hello@alexrivera.dev">hello@alexrivera.dev</a></li>
+            <li><a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+            <li><a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+          </ul>
+        </div>
+
+        <!-- Every input paired with a <label for=""> -->
+        <form class="contact-form" action="#" method="post">
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required>
+          </div>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+          <div class="form-row">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send message</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================
+       FOOTER — one per page, site-wide info
+       ============================================ -->
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p>&copy; <span id="year"></span> Mohammed Ali. Built from scratch, by hand.</p>
+      <nav aria-label="Footer">
+        <ul class="footer-nav">
+          <li><a href="#about">About</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

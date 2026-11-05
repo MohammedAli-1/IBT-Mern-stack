@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Checkout.css";
 import { useShop } from "../context/ShopContext";
+import { validate } from "../components/validate";
 
 function Checkout() {
   const { cart, clearCart } = useShop();
@@ -15,6 +16,10 @@ function Checkout() {
     address: "",
     city: "",
   });
+  const [submiting, setSubmiting] = useState(false);
+  const [severError, setServerError] = useState(false);
+  const [touched, setTouched] = useState(false);
+  const error = validate(formData);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -25,13 +30,25 @@ function Checkout() {
     });
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+    if (Object.keys(error).length > 0) {
+      const firstFilterdError = Object.keys(error)[0];
+      document.getElementById(firstFilterdError).focus();
+      return;
+    }
+    if (submiting) return;
+    setSubmiting(true);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      clearCart();
 
-    console.log(formData);
-    clearCart();
-
-    navigate("/order-success");
+      navigate("/order-success");
+    } catch (error) {
+      setServerError(error);
+    } finally {
+      setSubmiting(false);
+    }
   }
 
   if (cart.length === 0) {
@@ -55,10 +72,8 @@ function Checkout() {
       <div className="checkout-layout">
         <form className="checkout-form" onSubmit={handleSubmit}>
           <h2>Customer Information</h2>
-
           <div className="form-group">
             <label htmlFor="fullName">Full Name</label>
-
             <input
               id="fullName"
               name="fullName"
@@ -66,10 +81,10 @@ function Checkout() {
               value={formData.fullName}
               onChange={handleChange}
               placeholder="Enter your full name"
-              required
+              onBlur={() => setTouched(true)}
             />
           </div>
-
+          {touched && error.fullName && <p>{error.fullName}</p>}
           <div className="form-group">
             <label htmlFor="phone">Phone Number</label>
 
@@ -80,10 +95,10 @@ function Checkout() {
               value={formData.phone}
               onChange={handleChange}
               placeholder="+251..."
-              required
+              onBlur={() => setTouched(true)}
             />
+            {touched && error.phone && <p>{error.phone}</p>}
           </div>
-
           <div className="form-group">
             <label htmlFor="email">Email</label>
 
@@ -94,10 +109,10 @@ function Checkout() {
               value={formData.email}
               onChange={handleChange}
               placeholder="example@email.com"
-              required
+              onBlur={() => setTouched(true)}
             />
+            {touched && error.email && <p>{error.email}</p>}
           </div>
-
           <div className="form-group">
             <label htmlFor="address">Address</label>
 
@@ -106,12 +121,12 @@ function Checkout() {
               name="address"
               value={formData.address}
               onChange={handleChange}
+              onBlur={() => setTouched(true)}
               placeholder="Enter your address"
               rows="4"
-              required
             />
+            {touched && error.address && <p>{error.address}</p>}
           </div>
-
           <div className="form-group">
             <label htmlFor="city">City</label>
 
@@ -122,12 +137,16 @@ function Checkout() {
               value={formData.city}
               onChange={handleChange}
               placeholder="Enter your city"
-              required
+              onBlur={() => setTouched(true)}
             />
+            {touched && error.city && <p>{error.city}</p>}
           </div>
-
-          <button type="submit" className="place-order-button">
-            Place Order
+          <button
+            type="submit"
+            className="place-order-button"
+            disabled={submiting}
+          >
+            {submiting ? "sending..." : "place order"}
           </button>
         </form>
 
